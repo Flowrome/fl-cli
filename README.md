@@ -5,22 +5,22 @@ This project is a CLI to create your own web-components library project using [W
 Flowrome Stencil CLI is used to create a scaffold that contains the structure to build your own web-components library using Stencil
 
 ## INSTALLATION
-```node
+```
 git clone https://Flowrome@bitbucket.org/Flowrome/fl-stencil-cli.git
 npm i -g /path/to/fl-stencil-cli/
 ```
 
 ## USAGE
 * **TO CREATE PROJECT SCAFFOLD**:
-    - ```node
+    - ```
         flcli project [PROJECT_NAME]
         ```
 * **TO CREATE A PAGE (you need to be inside a fl-project)**:
-    - ```node
+    - ```
         flcli page [PAGE_NAME]
         ```
 * **TO CREATE A MOLECULE (you need to be inside a fl-project)**:
-    - ```node
+    - ```
         flcli molecule [MOLECULE_NAME]
         ```
 
