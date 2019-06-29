@@ -5,6 +5,14 @@ const { ENVS } = require('../consts');
 
 Config.updateEnv(ENVS.PROD);
 
-process.argv.forEach(function (val, index, array) {
-    cli.decide(val, index, array);
-});
+if (process.argv[2] && process.argv[2] === 'project') {
+    cli.configurables().then(() => {
+        process.argv.forEach(function (val, index, array) {
+            cli.decide(val, index, array);
+        });
+    })
+} else {
+    process.argv.forEach(function (val, index, array) {
+        cli.decide(val, index, array);
+    });
+}

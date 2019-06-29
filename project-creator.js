@@ -57,7 +57,7 @@ module.exports = {
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/readme.md.tmpl`, `${appPath}/readme.md`, '', 'markdown');
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/tsconfig.json.tmpl`, `${appPath}/tsconfig.json`, '', 'json');
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/.editorconfig.tmpl`, `${appPath}/.editorconfig`, '');
-            Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/fl-stencil-config.json.tmpl`, `${appPath}/fl-stencil-config.json`, _.kebabCase(appName), 'json');
+            Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/fl-stencil-config.json.tmpl`, `${appPath}/fl-stencil-config.json`, [_.kebabCase(appName), JSON.stringify(Config.configurable)], 'json', [Config.toReplace, /\[TMPL_CONFIGURATION\]/g]);
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/fl-stencil-md-reader.js.tmpl`, `${appPath}/fl-stencil-md-reader.js`, '', 'babel');
             Common.successMessage('copied succsesfully stencil files');
         }).catch((error) => {

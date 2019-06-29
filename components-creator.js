@@ -5,7 +5,7 @@ const Config = require('./config');
 module.exports = {
     createMolecule(moleculeName) {
         if (Common.checkIfCurrentProjectIsFLProject()) {
-            moleculeName = `${Config.configurable.molecule_prefix}-${_.kebabCase(moleculeName)}`;
+            moleculeName = `${Config.getConfigurable().molecule_prefix}-${_.kebabCase(moleculeName)}`;
             moleculeNameClass = `${_.camelCase(moleculeName).charAt(0).toUpperCase() + _.camelCase(moleculeName).slice(1)}`;
             const moleculePath = `${Config.moleculesPath()}/${moleculeName}.molecule`;
             Common.createFolderSync(moleculePath);

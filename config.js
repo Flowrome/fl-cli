@@ -34,21 +34,22 @@ module.exports = {
             ...configuration
         }
     },
-    setConfigurableLocal(configuration) {
-        const config = JSON.parse(fs.readFileSync('./fl-stencil-config.json'));
-        config.configuration = {
-            ...this.configurable,
-            ...configuration
-        };
-        fs.writeFileSync('./fl-stencil-config.json', prettier.format(JSON.stringify(config), prettyOpts('json')));
-    },
-    getConfigurable(path) {
+    getConfigurableProp(path) {
         switch (this.env) {
             case ENVS.DEV:
                 return this.configurable[path];
             case ENVS.PROD:
-                const configurable = JSON.parse(fs.readFileSync('./fl-stencil-config.json'));
+                const configurable = JSON.parse(fs.readFileSync('./fl-stencil-config.json', 'UTF-8'));
                 return configurable.configuration[path];
+        }
+    },
+    getConfigurable() {
+        switch (this.env) {
+            case ENVS.DEV:
+                return this.configurable;
+            case ENVS.PROD:
+                const configurable = JSON.parse(fs.readFileSync('./fl-stencil-config.json', 'UTF-8'));
+                return configurable.configuration;
         }
     },
     installationPath() {
