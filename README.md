@@ -1,6 +1,6 @@
 # FLOWROME STENCIL CLI
 
-This project is a CLI to create your own web-components library project using [Web-Components](https://www.webcomponents.org/) [Stencil](https://stenciljs.com/), [SCSS](https://sass-lang.com/), [Typescript](https://www.typescriptlang.org/) and [JSX](https://it.reactjs.org/docs/introducing-jsx.html).
+This project is a CLI to create your own web-components library project using [Web-Components](https://www.webcomponents.org/), [Stencil](https://stenciljs.com/), [Stencil/router](https://github.com/ionic-team/stencil-router) , [SCSS](https://sass-lang.com/), [Typescript](https://www.typescriptlang.org/) and [JSX](https://it.reactjs.org/docs/introducing-jsx.html).
 
 Flowrome Stencil CLI is used to create a scaffold that contains the structure to build your own web-components library using Stencil
 
