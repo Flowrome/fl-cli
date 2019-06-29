@@ -1,0 +1,13 @@
+import { newE2EPage } from '@stencil/core/testing';
+describe('[TMPL_NAME]-page', () => {
+  it('renders', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<[TMPL_NAME]-page></[TMPL_NAME]-page>');
+    const element = await page.find('[TMPL_NAME]-page');
+  });
+
+  it('renders changes to the name data', async () => {
+    const page = await newE2EPage();
+  });
+});

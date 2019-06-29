@@ -1,0 +1,13 @@
+import { newE2EPage } from '@stencil/core/testing';
+describe('[TMPL_NAME]-molecule', () => {
+  it('renders', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<[TMPL_NAME]-molecule></[TMPL_NAME]-molecule>');
+    const element = await page.find('[TMPL_NAME]-molecule');
+  });
+
+  it('renders changes to the name data', async () => {
+    const page = await newE2EPage();
+  });
+});

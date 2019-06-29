@@ -1,0 +1,11 @@
+@function size($size) {
+  $remSize: $size / 10px;
+  @return #{$remSize}rem;
+}
+
+@function deep-scan($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}

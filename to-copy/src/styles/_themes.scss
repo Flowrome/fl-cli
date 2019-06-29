@@ -1,0 +1,11 @@
+$theme: (
+  white: (
+    primary: #fff,
+    secondary: #f1f1f1,
+    tertiary: #eee
+  )
+);
+
+@function color($keys...) {
+  @return deep-scan($theme, $keys);
+}
