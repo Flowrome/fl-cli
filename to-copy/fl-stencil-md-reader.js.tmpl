@@ -1,0 +1,21 @@
+const glob = require('glob');
+const fs = require('fs');
+
+const patternReadmes = './src/components/**/*.md';
+
+glob(patternReadmes, (err, matches) => {
+  if (err) {
+    console.log('EXITING', err);
+    process.exit;
+  }
+  if (matches && matches.length > 0) {
+    const json = {};
+    matches.map(match => {
+      const array = match.split('/');
+      const name = array[array.length - 2];
+      const readme = fs.readFileSync(match, 'UTF-8');
+      json[name] = readme;
+    })
+    fs.writeFileSync('./src/assets/mocks/readmes.json', JSON.stringify(json));
+  }
+})
