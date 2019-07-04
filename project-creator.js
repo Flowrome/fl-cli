@@ -16,6 +16,7 @@ module.exports = {
         this.startProjectStructure(appName);
         this.copyStencilFiles(appName).then(() => {
             this.createApp(appName);
+            this.createMarkdownReader(appName);
 
             log.cwarn('INSTALLING DEPENDENCIES');
 

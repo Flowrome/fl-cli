@@ -12,11 +12,13 @@ export class [TMPL_NAME:CLASS_CASE]Component {
 
   private goToReadmePage() {
     this.history.push({
+      key: 'md-reader[[TMPL_NAME]]',
+      scrollPosition: [0, 0],
       pathname: '/md-reader',
       query: {
-        id: '[TMPL_NAME].molecule'
-      }
-    })
+        id: '[TMPL_NAME].molecule',
+      },
+    });
   }
 
   render() {
