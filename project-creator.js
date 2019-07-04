@@ -35,6 +35,7 @@ module.exports = {
     startProjectStructure(appName) {
         const appPath = `./${appName}`;
         Common.createFolderSync(`${appPath}/src/components/app`);
+        Common.createFolderSync(`${appPath}/src/components/markdown-reader`);
         Common.createFolderSync(`${appPath}/src/assets/fonts`);
         Common.createFolderSync(`${appPath}/src/assets/images`, false);
         Common.createFolderSync(`${appPath}/src/assets/mocks`, false);
