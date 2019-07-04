@@ -1,6 +1,7 @@
 .container-fluid {
   margin: 0 auto;
   width: 100%;
+  max-width: $container-fluid-max;
   padding: 0 size(14px);
   box-sizing: border-box;
 }
