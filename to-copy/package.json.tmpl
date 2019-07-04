@@ -15,7 +15,7 @@
     "loader/"
   ],
   "scripts": {
-    "readme-compiler": "node ./fl-stencil-md-reader.js",
+    "readme-compiler": "npm run build && node ./fl-stencil-md-reader.js",
     "build": "stencil build --docs",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
