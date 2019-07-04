@@ -18,7 +18,7 @@ module.exports = {
             this.createApp(appName);
 
             log.cwarn('INSTALLING DEPENDENCIES');
-            
+
             const spinner = new Spinner('installing... %s');
             spinner.setSpinnerString('|/-\\');
             spinner.start();
@@ -70,5 +70,12 @@ module.exports = {
         Common.readTmplAndWrite(`${Config.installationPath()}/templates/app/app.tsx.tmpl`, `${appPath}/src/components/app/app.tsx`, '', 'typescript');
         Common.readTmplAndWrite(`${Config.installationPath()}/templates/app/app.scss.tmpl`, `${appPath}/src/components/app/app.scss`, '', 'scss');
         Common.successMessage('register app');
+    },
+    createMarkdownReader(appName) {
+        const appPath = `./${appName}`;
+        Common.readTmplAndWrite(`${Config.installationPath()}/templates/markdown-reader/markdown-reader.e2e.ts.tmpl`, `${appPath}/src/components/markdown-reader/markdown-reader.e2e.ts`, '', 'typescript');
+        Common.readTmplAndWrite(`${Config.installationPath()}/templates/markdown-reader/markdown-reader.tsx.tmpl`, `${appPath}/src/components/markdown-reader/markdown-reader.tsx`, '', 'typescript');
+        Common.readTmplAndWrite(`${Config.installationPath()}/templates/markdown-reader/markdown-reader.scss.tmpl`, `${appPath}/src/components/markdown-reader/markdown-reader.scss`, '', 'scss');
+        Common.successMessage('register markdown-page');
     }
 }

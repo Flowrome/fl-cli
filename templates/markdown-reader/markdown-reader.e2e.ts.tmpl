@@ -1,0 +1,13 @@
+import { newE2EPage } from '@stencil/core/testing';
+describe('markdown-reader-page', () => {
+  it('renders', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<markdown-reader-page></markdown-reader-page>');
+    const element = await page.find('markdown-reader-page');
+  });
+
+  it('renders changes to the name data', async () => {
+    const page = await newE2EPage();
+  });
+});

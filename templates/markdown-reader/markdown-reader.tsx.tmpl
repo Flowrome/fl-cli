@@ -1,0 +1,57 @@
+import { Component, Prop, h, Element } from '@stencil/core';
+import { RouterHistory } from '@stencil/router';
+import mermaid from '../../../node_modules/mermaid/dist/mermaid.min';
+import marked from '../../../node_modules/marked/marked.min';
+
+@Component({
+	tag: 'markdown-reader',
+	styleUrl: 'markdown-reader.scss'
+})
+export class MarkdownReaderPage {
+  @Prop() history: RouterHistory;
+  @Element() element: HTMLElement;
+
+	private id: string;
+	private name: string;
+	private md: string;
+
+	async componentWillLoad() {
+		mermaid.initialize({ startOnLoad: true });
+    this.id = this.history.location.query.id;
+		await import('../../assets/mocks/readmes.json').then(
+			(readmes: {
+				app: { md: string; name: string };
+				default: { [key: string]: { md: string; name: string } };
+			}) => {
+				const json: { [key: string]: { name: string; md: string } } = readmes.default;
+				if (json[this.id]) {
+					this.name = json[this.id].name;
+          this.md = marked(json[this.id].md);
+				}
+			}
+		);
+	}
+
+	componentDidLoad() {
+		this.element.querySelector('#md-container-section').querySelectorAll('.mermaid, .language-mermaid').forEach((elem, index) => {
+      const innerText = elem.textContent;
+      elem.id = `graph-${new Date().valueOf() + index}`
+      mermaid.render(elem.id, innerText, (svgCode) => {
+        elem.innerHTML = svgCode
+      })
+    });
+	}
+
+	render() {
+		return (
+			<main class="main-container">
+				<header class="default-header">
+					<div class="default-header__content container-fluid">
+						<h1>{this.name}</h1>
+					</div>
+				</header>
+				<section class="page container-fluid" id="md-container-section" innerHTML={this.md} />
+			</main>
+		);
+	}
+}

@@ -1,7 +1,7 @@
 const glob = require('glob');
 const fs = require('fs');
-
-const patternReadmes = './src/components/**/*.md';
+const pathDivider = (process.platform === 'win32') ? '\\' : '/';
+const patternReadmes = `.${pathDivider}src${pathDivider}components${pathDivider}**${pathDivider}*.md`;
 
 glob(patternReadmes, (err, matches) => {
   if (err) {
@@ -11,11 +11,14 @@ glob(patternReadmes, (err, matches) => {
   if (matches && matches.length > 0) {
     const json = {};
     matches.map(match => {
-      const array = match.split('/');
+      const array = match.split(`${pathDivider}`);
       const name = array[array.length - 2];
       const readme = fs.readFileSync(match, 'UTF-8');
-      json[name] = readme;
-    })
-    fs.writeFileSync('./src/assets/mocks/readmes.json', JSON.stringify(json));
+      json[name] = {
+        md: readme,
+        name: name
+      };
+    });
+    fs.writeFileSync(`.${pathDivider}src${pathDivider}assets${pathDivider}mocks${pathDivider}readmes.json`, JSON.stringify(json));
   }
-})
+});

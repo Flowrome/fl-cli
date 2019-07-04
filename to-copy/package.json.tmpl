@@ -15,6 +15,7 @@
     "loader/"
   ],
   "scripts": {
+    "readme-compiler": "node ./fl-stencil-md-reader.js",
     "build": "stencil build --docs",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
@@ -27,6 +28,8 @@
   "dependencies": {
     "@stencil/router": "^1.0.1",
     "@stencil/sass": "^1.0.1",
-    "glob": "^7.1.4"
+    "glob": "^7.1.4",
+    "marked": "^0.6.3",
+    "mermaid": "^8.1.0"
   }
 }
