@@ -41,6 +41,8 @@ module.exports = {
         Common.createFolderSync(`${appPath}/src/assets/mocks`, false);
         Common.createFolderSync(`${appPath}/src/styles`, false);
         Common.createFolderSync(`${appPath}/src/utils`, false);
+
+        
     },
     copyStencilFiles(appName) {
         const appPath = `./${appName}`;
