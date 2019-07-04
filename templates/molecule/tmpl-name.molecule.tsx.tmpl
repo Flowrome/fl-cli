@@ -1,4 +1,5 @@
 import { Component, Prop, h } from '@stencil/core';
+import { RouterHistory } from '@stencil/router';
 
 @Component({
   tag: '[TMPL_NAME]-molecule',
@@ -6,7 +7,18 @@ import { Component, Prop, h } from '@stencil/core';
   shadow: true,
 })
 export class [TMPL_NAME:CLASS_CASE]Component {
+  @Prop() history: RouterHistory;
   @Prop() text: string = '[TMPL_NAME]-molecule';
+
+  private goToReadmePage() {
+    this.history.push({
+      pathname: '/md-reader',
+      query: {
+        id: '[TMPL_NAME].molecule'
+      }
+    })
+  }
+
   render() {
     return <p>You are in {this.text}</p>;
   }
