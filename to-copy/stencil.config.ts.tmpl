@@ -1,12 +1,20 @@
 import { Config } from '@stencil/core';
 import { sass } from '@stencil/sass';
+import { postcss } from '@stencil/postcss';
+import * as autoprefixer from 'autoprefixer';
 
 export const config: Config = {
   namespace: '[TMPL_NAME]',
   outputTargets: [
     {
       type: 'dist',
-      esmLoaderPath: '../loader'
+      esmLoaderPath: '../loader',
+      copy: [
+        {
+          src: require('path').resolve('./src/assets/'),
+          dest: require('path').resolve('./dist/assets/')
+        }
+      ],
     },
     {
       type: 'docs-readme'
@@ -22,6 +30,9 @@ export const config: Config = {
       injectGlobalPaths: [
         'src/styles/_styles.scss',
       ]
+    }),
+    postcss({
+      plugins: [autoprefixer()]
     })
   ],
 };
