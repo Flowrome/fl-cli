@@ -1,24 +1,62 @@
-const glob = require('glob');
+const glob = require('glob-promise');
 const fs = require('fs');
-const pathDivider = (process.platform === 'win32') ? '\\' : '/';
+const pathDivider = process.platform === 'win32' ? '\\' : '/';
 const patternReadmes = `.${pathDivider}src${pathDivider}components${pathDivider}**${pathDivider}*.md`;
+const patternReadmesBck = `.${pathDivider}src${pathDivider}components${pathDivider}**${pathDivider}*.bck`;
 
-glob(patternReadmes, (err, matches) => {
-  if (err) {
-    console.log('EXITING', err);
+if (process.argv.indexOf('--keep-saved') > -1) {
+  glob(patternReadmes).then((matches) => {
+    if (matches && matches.length > 0) {
+      matches.map(match => {
+        const readme = fs.readFileSync(match, 'UTF-8');
+        fs.writeFileSync(match.replace('readme.md', 'readme.bck'), readme);
+      });
+    }
+  }).catch(err => {
+    console.error('EXITING', err);
     process.exit;
-  }
-  if (matches && matches.length > 0) {
-    const json = {};
-    matches.map(match => {
-      const array = match.split(`${pathDivider}`);
-      const name = array[array.length - 2];
-      const readme = fs.readFileSync(match, 'UTF-8');
-      json[name] = {
-        md: readme,
-        name: name
-      };
+  })
+} else {
+  glob(patternReadmes).then(matches => {
+    return glob(patternReadmesBck).then((matchesBck) => {
+      return {
+        matches: matches,
+        matchesBck: matchesBck
+      }
+    }).catch(err => {
+      console.error('ERR_BCK', err);
+      return {
+        matches: matches,
+        matchesBck: null
+      }
     });
-    fs.writeFileSync(`.${pathDivider}src${pathDivider}assets${pathDivider}mocks${pathDivider}readmes.json`, JSON.stringify(json));
-  }
-});
+  }).then((data) => {
+    const matches = data.matches;
+    const matchesBck = data.matchesBck;
+    if (matches && matches.length > 0) {
+      const json = {};
+      matches.map(match => {
+        let bck = null;
+        if (matchesBck && matchesBck.length > 0 && fs.existsSync(match.replace('readme.md', 'readme.bck'))) {
+          bck = fs.readFileSync(match.replace('readme.md', 'readme.bck'), 'UTF-8');
+          fs.writeFileSync(match, bck);
+          fs.unlinkSync(match.replace('readme.md', 'readme.bck'))
+        }
+        const array = match.split(`${pathDivider}`);
+        const name = array[array.length - 2];
+        const readme = fs.readFileSync(match, 'UTF-8');
+        json[name] = {
+          md: readme,
+          name: name,
+        };
+      });
+      fs.writeFileSync(
+        `.${pathDivider}src${pathDivider}assets${pathDivider}mocks${pathDivider}readmes.json`,
+        JSON.stringify(json),
+      );
+    }
+  }).catch(err => {
+    console.error('EXITING', err);
+    process.exit;
+  });
+}

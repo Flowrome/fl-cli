@@ -15,7 +15,8 @@
     "loader/"
   ],
   "scripts": {
-    "readme-builder": "npm run build && node ./fl-stencil-md-reader.js",
+    "readme-backup": "node ./fl-stencil-md-reader.js --keep-saved",
+    "readme-builder": "npm run readme-backup && npm run build && npm run readme-compiler",
     "readme-compiler": "node ./fl-stencil-md-reader.js",
     "build": "stencil build --docs",
     "start": "stencil build --dev --watch --serve",
@@ -30,6 +31,7 @@
     "@stencil/router": "^1.0.1",
     "@stencil/sass": "^1.0.1",
     "glob": "^7.1.4",
+    "glob-promise": "^3.4.0",
     "marked": "^0.6.3",
     "mermaid": "^8.1.0"
   }
