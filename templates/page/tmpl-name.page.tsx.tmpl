@@ -9,15 +9,13 @@ export class [TMPL_NAME:CLASS_CASE]Page {
   @Prop() header_title: string = <h1>[TMPL_NAME].page HEADER</h1>;
   @Prop() section_title: string = <h2>[TMPL_NAME].page SECTION</h2>;
   render() {
-    return (
-      <main class="main-container">
-        <header class="default-header">
-          <div class="default-header__content container-fluid">
-            {this.header_title}
-          </div>
-        </header>
-        <section class="page container-fluid">{this.section_title}</section>
-      </main>
-    );
+		return [
+			<header class="default-header">
+				<div class="default-header__content container-fluid">{this.header_title}</div>
+			</header>,
+			<main class="main-container">
+				<section class="page container-fluid">{this.section_title}</section>
+			</main>
+		];
   }
 }
