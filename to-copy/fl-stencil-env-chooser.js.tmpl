@@ -3,6 +3,7 @@ const fs = require('fs');
 const pathDivider = process.platform === 'win32' ? '\\' : '/';
 const patternEnvs = `.${pathDivider}src${pathDivider}envs`;
 const defaultEnv = 'dev'
+const defaultCommand = 'compile-start'
 
 let argv = process.argv.splice(2);
 let choosedEnv = '';
@@ -32,7 +33,7 @@ if (argv.length > 0) {
   child.stderr.on('data', d => console.log(`[FLCLI - STENCIL_ERROR]:
   ${d.toString()}`));
 } else {
-  const child = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', [ 'run', 'dev']);
+  const child = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', [ 'run', defaultCommand]);
   child.stdout.on('data', d => console.log(`[FLCLI - STENCIL_PROCESS]:
   ${d.toString()}`));
   child.stderr.on('data', d => console.log(`[FLCLI - STENCIL_ERROR]:

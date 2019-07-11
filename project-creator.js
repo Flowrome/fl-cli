@@ -26,9 +26,11 @@ module.exports = {
 
             shell.cd(appPath);
             shell.exec('npm i', null, () => {
-                spinner.stop();
-                shell.cd('../');
-                log.cwarn('FINISHED INSTALLING DEPENDENCIES');
+                shell.exec('git init', null, () => {
+                    spinner.stop();
+                    shell.cd('../');
+                    log.cwarn('FINISHED INSTALLING DEPENDENCIES AND GIT INITIALIZATION');
+                })
             })
         });
     },
@@ -61,6 +63,7 @@ module.exports = {
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/readme.md.tmpl`, `${appPath}/readme.md`, '', 'markdown');
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/tsconfig.json.tmpl`, `${appPath}/tsconfig.json`, '', 'json');
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/.editorconfig.tmpl`, `${appPath}/.editorconfig`, '');
+            Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/.gitignore.tmpl`, `${appPath}/.gitignore`, '');
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/fl-stencil-config.json.tmpl`, `${appPath}/fl-stencil-config.json`, [_.kebabCase(appName), JSON.stringify(Config.configurable)], 'json', [Config.toReplace, /\[TMPL_CONFIGURATION\]/g]);
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/fl-stencil-md-reader.js.tmpl`, `${appPath}/fl-stencil-md-reader.js`, '', 'babel');
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/fl-stencil-env-chooser.js.tmpl`, `${appPath}/fl-stencil-env-chooser.js`, '', 'babel');
