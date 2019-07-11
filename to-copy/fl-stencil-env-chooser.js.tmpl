@@ -19,7 +19,7 @@ if (envArgv > -1 && fs.existsSync(`${patternEnvs}/env.${env}.ts`)) {
   choosedEnv = `${patternEnvs}${pathDivider}env.${defaultEnv}.ts`;
 }
 
-argv = argv.splice(1);
+argv = argv.filter(arg => arg.indexOf('env=') < 0);
 
 if (fs.existsSync(patternEnvs)) {
   fs.writeFileSync(`${patternEnvs}${pathDivider}env.ts`, fs.readFileSync(choosedEnv, 'UTF-8'));
