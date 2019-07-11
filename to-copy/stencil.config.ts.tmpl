@@ -2,6 +2,7 @@ import { Config } from '@stencil/core';
 import { sass } from '@stencil/sass';
 import { postcss } from '@stencil/postcss';
 import autoprefixer from 'autoprefixer';
+import alias from 'rollup-plugin-alias';
 
 export const config: Config = {
   namespace: '[TMPL_NAME]',
@@ -33,6 +34,13 @@ export const config: Config = {
     }),
     postcss({
       plugins: [autoprefixer()]
+    }),
+    alias({
+      resolve: ['.jsx', '.js', '.tsx', '.ts'],
+      '@env': 'src/envs/env.ts',
+      '@libs': 'node_modules',
+      '@assets': 'src/assets',
+      '@utils': 'src/utils',
     })
   ],
 };

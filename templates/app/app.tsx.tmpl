@@ -1,5 +1,6 @@
 import { Component, h } from '@stencil/core';
 import '@stencil/router';
+import { Environment } from '@env';
 
 @Component({
   tag: 'fl-app',
@@ -12,7 +13,7 @@ export class AppPage {
       <stencil-router>
         <stencil-route-switch scrollTopOffset={0}>
           <stencil-route url="/" component="page-name" exact={true}></stencil-route>
-          <stencil-route url="/md-reader" component="markdown-reader"></stencil-route>
+					{!Environment.prod && <stencil-route url="/md-reader" component="markdown-reader" />}
         </stencil-route-switch>
       </stencil-router>
     );

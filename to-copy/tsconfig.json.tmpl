@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
     "declaration": false,
@@ -15,7 +16,13 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "jsx": "react",
-    "jsxFactory": "h"
+    "jsxFactory": "h",
+    "paths": {
+      "@env": ["src/envs/env.ts"],
+      "@libs/*": ["node_modules/*"],
+      "@assets/*": ["src/assets/*"],
+      "@utils/*": ["src/utils/*"]
+    }
   },
   "include": [
     "src",
