@@ -15,11 +15,16 @@
     "loader/"
   ],
   "scripts": {
+    "start": "node ./fl-stencil-env-chooser.js",
+    "start-dev": "node ./fl-stencil-env-chooser.js env=dev"
+    "start-prod": "node ./fl-stencil-env-chooser.js env=prod"
     "readme-backup": "node ./fl-stencil-md-reader.js --keep-saved",
     "readme-builder": "npm run readme-backup && npm run build && npm run readme-compiler",
     "readme-compiler": "node ./fl-stencil-md-reader.js",
-    "build": "stencil build --docs",
-    "start": "stencil build --dev --watch --serve",
+    "build": "npm run start && stencil build --docs",
+    "build-dev": "npm run start env=dev && stencil build --docs",
+    "build-prod": "npm run start env=prod && stencil build --docs",
+    "dev": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll"
   },
@@ -32,6 +37,7 @@
     "@stencil/sass": "^1.0.1",
     "@stencil/postcss": "^1.0.1",
     "@types/autoprefixer": "^9.5.0",
+    "autoprefixer": "^9.6.1",
     "glob": "^7.1.4",
     "glob-promise": "^3.4.0",
     "marked": "^0.6.3",

@@ -1,0 +1,40 @@
+const { spawn } = require('child_process')
+const fs = require('fs');
+const pathDivider = process.platform === 'win32' ? '\\' : '/';
+const patternEnvs = `.${pathDivider}src${pathDivider}envs`;
+const defaultEnv = 'dev'
+
+let argv = process.argv.splice(2);
+let choosedEnv = '';
+
+const envArgv = argv.indexOf('env=');
+const env = (envArgv > -1) ? argv[envArgv].replace('env=', '') : '';
+
+if (envArgv > -1 && fs.existsSync(`${patternEnvs}/env.${env}.ts`)) {
+  choosedEnv = `${patternEnvs}${pathDivider}env.${env}.ts`;
+} else {
+  if (envArgv > - 1) {
+    console.error('[ENV_NOT_FOUND]', `The env you choosed doesn't exist ${`${patternEnvs}${pathDivider}env.${env}.ts`}`);
+  }
+  choosedEnv = `${patternEnvs}${pathDivider}env.${defaultEnv}.ts`;
+}
+
+argv = argv.splice(1);
+
+if (fs.existsSync(patternEnvs)) {
+  fs.writeFileSync(`${patternEnvs}${pathDivider}env.ts`, fs.readFileSync(choosedEnv, 'UTF-8'));
+}
+
+if (argv.length > 0) {
+  const child = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', [ 'run', ...argv]);
+  child.stdout.on('data', d => console.log(`[FLCLI - STENCIL_PROCESS]:
+  ${d.toString()}`));
+  child.stderr.on('data', d => console.log(`[FLCLI - STENCIL_ERROR]:
+  ${d.toString()}`));
+} else {
+  const child = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', [ 'run', 'dev']);
+  child.stdout.on('data', d => console.log(`[FLCLI - STENCIL_PROCESS]:
+  ${d.toString()}`));
+  child.stderr.on('data', d => console.log(`[FLCLI - STENCIL_ERROR]:
+  ${d.toString()}`));
+}

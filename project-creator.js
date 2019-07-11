@@ -40,15 +40,15 @@ module.exports = {
         Common.createFolderSync(`${appPath}/src/assets/images`, false);
         Common.createFolderSync(`${appPath}/src/assets/mocks`, false);
         Common.createFolderSync(`${appPath}/src/styles`, false);
-        Common.createFolderSync(`${appPath}/src/utils`, false);
-
-        
+        Common.createFolderSync(`${appPath}/src/utils`, false);  
+        Common.createFolderSync(`${appPath}/src/envs`, false);  
     },
     copyStencilFiles(appName) {
         const appPath = `./${appName}`;
         const promise = Promise.all([
             new Promise((resolve, reject) => ncp(`${Config.installationPath()}/to-copy/src/styles`, `${appPath}/src/styles`, (err) => (err ? reject(err) : resolve()))),
             new Promise((resolve, reject) => ncp(`${Config.installationPath()}/to-copy/src/assets`, `${appPath}/src/assets`, (err) => (err ? reject(err) : resolve()))),
+            new Promise((resolve, reject) => ncp(`${Config.installationPath()}/to-copy/envs`, `${appPath}/src/envs`, (err) => (err ? reject(err) : resolve()))),
         ])
         return promise.then(() => {
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/src/components.d.ts.tmpl`, `${appPath}/src/components.d.ts`, '', 'typescript')
@@ -63,6 +63,7 @@ module.exports = {
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/.editorconfig.tmpl`, `${appPath}/.editorconfig`, '');
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/fl-stencil-config.json.tmpl`, `${appPath}/fl-stencil-config.json`, [_.kebabCase(appName), JSON.stringify(Config.configurable)], 'json', [Config.toReplace, /\[TMPL_CONFIGURATION\]/g]);
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/fl-stencil-md-reader.js.tmpl`, `${appPath}/fl-stencil-md-reader.js`, '', 'babel');
+            Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/fl-stencil-env-chooser.js.tmpl`, `${appPath}/fl-stencil-env-chooser.js`, '', 'babel');
             Common.successMessage('copied succsesfully stencil files');
         }).catch((error) => {
             Common.exitWithError(error);
