@@ -37,10 +37,8 @@ export const config: Config = {
     }),
     alias({
       resolve: ['.jsx', '.js', '.tsx', '.ts'],
-      '@env': 'src/envs/env.ts',
-      '@libs': 'node_modules',
-      '@assets': 'src/assets',
-      '@utils': 'src/utils',
+      // ROLLUP ALIAS SUPPORT ONLY THE ALIASES FOR FILES (NOT FOR FOLDERS)
+      '@env': 'src/envs/env.ts'
     })
   ],
 };

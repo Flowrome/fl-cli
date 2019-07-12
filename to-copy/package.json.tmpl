@@ -14,12 +14,15 @@
     "dist/",
     "loader/"
   ],
+  "repository": {
+    "type": "git"
+  },
   "scripts": {
     "start": "node ./fl-stencil-env-chooser.js",
     "start-dev": "node ./fl-stencil-env-chooser.js env=dev",
     "start-prod": "node ./fl-stencil-env-chooser.js env=prod",
     "readme-backup": "node ./fl-stencil-md-reader.js --keep-saved",
-    "readme-builder": "npm run readme-backup && npm run build && npm run readme-compiler",
+    "readme": "npm run readme-backup && npm run build && npm run readme-compiler",
     "readme-compiler": "node ./fl-stencil-md-reader.js",
     "build": "npm run start compile",
     "build-dev": "npm run start-dev compile",
