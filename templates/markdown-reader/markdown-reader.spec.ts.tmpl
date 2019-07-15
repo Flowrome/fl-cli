@@ -1,0 +1,9 @@
+import { newSpecPage } from '@stencil/core/testing';
+import { MarkdownReaderPage } from './markdown-reader';
+
+it('should render MarkdownReaderPage', async () => {
+  const md = await newSpecPage({
+    components: [MarkdownReaderPage],
+    html: `<markdown-reader></markdown-reader>`,
+  });
+});

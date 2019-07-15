@@ -1,0 +1,29 @@
+import { newSpecPage } from '@stencil/core/testing';
+import { [TMPL_NAME:CLASS_CASE]Page } from './[TMPL_NAME].page';
+
+it('should render [TMPL_NAME]-page', async () => {
+  const page = await newSpecPage({
+    components: [[TMPL_NAME:CLASS_CASE]Page],
+    html: `<[TMPL_NAME]-page></[TMPL_NAME]-page>`,
+  });
+  expect(page.root).toEqualHtml(`
+    <[TMPL_NAME]-page>
+      <mock:shadow-root>
+        <header class="default-header">
+            <div class="container-fluid default-header__content">
+                <h1>
+                    [TMPL_NAME].page HEADER
+                </h1>
+            </div>
+        </header>
+        <main class="main-container">
+          <section class="container-fluid page">
+            <h2>
+              [TMPL_NAME].page SECTION
+            </h2>
+          </section>
+        </main>
+      </mock:shadow-root>
+    </[TMPL_NAME]-page>
+  `);
+});

@@ -1,0 +1,9 @@
+import { newSpecPage } from '@stencil/core/testing';
+import { AppPage } from './app';
+
+it('should render AppPage', async () => {
+  const page = await newSpecPage({
+    components: [AppPage],
+    html: `<fl-app></fl-app>`,
+  })
+});

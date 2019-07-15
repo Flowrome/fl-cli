@@ -1,0 +1,18 @@
+import { newSpecPage } from '@stencil/core/testing';
+import { [TMPL_NAME:CLASS_CASE]Molecule } from './[TMPL_NAME].molecule';
+
+it('should render [TMPL_NAME]-molecule', async () => {
+  const molecule = await newSpecPage({
+    components: [[TMPL_NAME:CLASS_CASE]Molecule],
+    html: `<[TMPL_NAME]-molecule></[TMPL_NAME]-molecule>`,
+  });
+  expect(molecule.root).toEqualHtml(`
+    <[TMPL_NAME]-molecule>
+      <mock:shadow-root>
+        <p>
+          You are in [TMPL_NAME]-molecule
+        </p>
+      </mock:shadow-root>
+    </[TMPL_NAME]-molecule>
+  `);
+});

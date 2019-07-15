@@ -75,6 +75,7 @@ module.exports = {
     createApp(appName) {
         const appPath = `./${appName}`;
         Common.readTmplAndWrite(`${Config.installationPath()}/templates/app/app.e2e.ts.tmpl`, `${appPath}/src/components/app/app.e2e.ts`, '', 'typescript');
+        Common.readTmplAndWrite(`${Config.installationPath()}/templates/app/app.spec.ts.tmpl`, `${appPath}/src/components/app/app.spec.ts`, '', 'typescript');
         Common.readTmplAndWrite(`${Config.installationPath()}/templates/app/app.tsx.tmpl`, `${appPath}/src/components/app/app.tsx`, '', 'typescript');
         Common.readTmplAndWrite(`${Config.installationPath()}/templates/app/app.scss.tmpl`, `${appPath}/src/components/app/app.scss`, '', 'scss');
         Common.successMessage('register app');
@@ -82,6 +83,7 @@ module.exports = {
     createMarkdownReader(appName) {
         const appPath = `./${appName}`;
         Common.readTmplAndWrite(`${Config.installationPath()}/templates/markdown-reader/markdown-reader.e2e.ts.tmpl`, `${appPath}/src/components/markdown-reader/markdown-reader.e2e.ts`, '', 'typescript');
+        Common.readTmplAndWrite(`${Config.installationPath()}/templates/markdown-reader/markdown-reader.spec.ts.tmpl`, `${appPath}/src/components/markdown-reader/markdown-reader.spec.ts`, '', 'typescript');
         Common.readTmplAndWrite(`${Config.installationPath()}/templates/markdown-reader/markdown-reader.tsx.tmpl`, `${appPath}/src/components/markdown-reader/markdown-reader.tsx`, '', 'typescript');
         Common.readTmplAndWrite(`${Config.installationPath()}/templates/markdown-reader/markdown-reader.scss.tmpl`, `${appPath}/src/components/markdown-reader/markdown-reader.scss`, '', 'scss');
         Common.successMessage('register markdown-page');
