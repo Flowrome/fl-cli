@@ -7,6 +7,7 @@ const prompt = require('prompt');
 module.exports = {
   configurables(array) {
     const promise = new Promise((resolve, reject) => {
+      const confirmRegex = /^([Y|y][E|e][S|s])+$/gm;
       const scheme = [
         ((array.length < 3) ? {
           ask: () => array.length < 3,
@@ -28,6 +29,27 @@ module.exports = {
           default: 'fl',
           description: 'Which prefix do you choose for your molecules?',
           pattern: /^[a-zA-Z]+$/gm
+        },
+        {
+          ask: () => (prompt.history('type') || {}).value === 'project' || array[2] === 'project',
+          name: 'include_spec',
+          default: 'YES',
+          description: 'Include E2E tests?',
+          pattern: /^([Y|y][E|e][S|s]|[N|n][O|o])+$/gm
+        },
+        {
+          ask: () => (prompt.history('type') || {}).value === 'project' || array[2] === 'project',
+          name: 'include_e2e',
+          default: 'YES',
+          description: 'Include Unit tests?',
+          pattern: /^([Y|y][E|e][S|s]|[N|n][O|o])+$/gm
+        },
+        {
+          ask: () => (prompt.history('type') || {}).value === 'project' || array[2] === 'project',
+          name: 'include_md_reader',
+          default: 'YES',
+          description: 'Include MD READER feature?',
+          pattern: /^([Y|y][E|e][S|s]|[N|n][O|o])+$/gm
         }
       ].filter(field => !!field);
       prompt.start();
@@ -40,6 +62,9 @@ module.exports = {
     })
       .then(result => {
         if (result) {
+          result.include_e2e = confirmRegex.test(result.include_e2e);
+          result.include_spec = confirmRegex.test(result.include_spec);
+          result.include_md_reader = confirmRegex.test(result.include_md_reader);
           array = [
             ...array,
             ...((result.type) ? [result.type] : []),

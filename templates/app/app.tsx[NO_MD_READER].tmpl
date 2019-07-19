@@ -1,0 +1,19 @@
+import { Component, h } from '@stencil/core';
+import '@stencil/router';
+
+@Component({
+  tag: 'fl-app',
+  styleUrl: 'app.scss',
+  shadow: true,
+})
+export class AppPage {
+  render() {
+    return (
+      <stencil-router>
+        <stencil-route-switch scrollTopOffset={0}>
+          <stencil-route url="/" component="page-name" exact={true}></stencil-route>
+        </stencil-route-switch>
+      </stencil-router>
+    );
+  }
+}

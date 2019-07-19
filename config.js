@@ -26,7 +26,10 @@ module.exports = {
     toReplace: /\[TMPL_NAME\]/g,
     appName: 'fl-stencil-cli',
     configurable: {
-        molecule_prefix: 'fl'
+        molecule_prefix: 'fl',
+        include_e2e: true,
+        include_spec: true,
+        include_md_reader: true
     },
     setConfigurable(configuration) {
         this.configurable = {

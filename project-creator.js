@@ -15,8 +15,12 @@ module.exports = {
         Common.createFolderSync(appPath);
         this.startProjectStructure(appName);
         this.copyStencilFiles(appName).then(() => {
+            shell.cd(appPath);
+
             this.createApp(appName);
-            this.createMarkdownReader(appName);
+            if (Config.getConfigurable().include_md_reader) {
+                this.createMarkdownReader(appName);
+            }
 
             log.cwarn('INSTALLING DEPENDENCIES');
 
@@ -24,7 +28,6 @@ module.exports = {
             spinner.setSpinnerString('|/-\\');
             spinner.start();
 
-            shell.cd(appPath);
             shell.exec('npm i', null, () => {
                 shell.exec('git init', null, () => {
                     spinner.stop();
@@ -42,8 +45,8 @@ module.exports = {
         Common.createFolderSync(`${appPath}/src/assets/images`, false);
         Common.createFolderSync(`${appPath}/src/assets/mocks`, false);
         Common.createFolderSync(`${appPath}/src/styles`, false);
-        Common.createFolderSync(`${appPath}/src/utils`, false);  
-        Common.createFolderSync(`${appPath}/src/envs`, false);  
+        Common.createFolderSync(`${appPath}/src/utils`, false);
+        Common.createFolderSync(`${appPath}/src/envs`, false);
     },
     copyStencilFiles(appName) {
         const appPath = `./${appName}`;
@@ -72,18 +75,26 @@ module.exports = {
             Common.exitWithError(error);
         });
     },
-    createApp(appName) {
-        const appPath = `./${appName}`;
-        Common.readTmplAndWrite(`${Config.installationPath()}/templates/app/app.e2e.ts.tmpl`, `${appPath}/src/components/app/app.e2e.ts`, '', 'typescript');
-        Common.readTmplAndWrite(`${Config.installationPath()}/templates/app/app.spec.ts.tmpl`, `${appPath}/src/components/app/app.spec.ts`, '', 'typescript');
-        Common.readTmplAndWrite(`${Config.installationPath()}/templates/app/app.tsx.tmpl`, `${appPath}/src/components/app/app.tsx`, '', 'typescript');
+    createApp() {
+        const appPath = `./`;
+        if (Config.getConfigurable().include_e2e) {
+            Common.readTmplAndWrite(`${Config.installationPath()}/templates/app/app.e2e.ts.tmpl`, `${appPath}/src/components/app/app.e2e.ts`, '', 'typescript');
+        }
+        if (Config.getConfigurable().include_spec) {
+            Common.readTmplAndWrite(`${Config.installationPath()}/templates/app/app.spec.ts.tmpl`, `${appPath}/src/components/app/app.spec.ts`, '', 'typescript');
+        }
+        Common.readTmplAndWrite(`${Config.installationPath()}/templates/app/app.tsx${(Config.getConfigurable().include_md_reader) ? '' : '[NO_MD_READER]'}.tmpl`, `${appPath}/src/components/app/app.tsx`, '', 'typescript');
         Common.readTmplAndWrite(`${Config.installationPath()}/templates/app/app.scss.tmpl`, `${appPath}/src/components/app/app.scss`, '', 'scss');
         Common.successMessage('register app');
     },
-    createMarkdownReader(appName) {
-        const appPath = `./${appName}`;
-        Common.readTmplAndWrite(`${Config.installationPath()}/templates/markdown-reader/markdown-reader.e2e.ts.tmpl`, `${appPath}/src/components/markdown-reader/markdown-reader.e2e.ts`, '', 'typescript');
-        Common.readTmplAndWrite(`${Config.installationPath()}/templates/markdown-reader/markdown-reader.spec.ts.tmpl`, `${appPath}/src/components/markdown-reader/markdown-reader.spec.ts`, '', 'typescript');
+    createMarkdownReader() {
+        const appPath = `./`;
+        if (Config.getConfigurable().include_e2e) {
+            Common.readTmplAndWrite(`${Config.installationPath()}/templates/markdown-reader/markdown-reader.e2e.ts.tmpl`, `${appPath}/src/components/markdown-reader/markdown-reader.e2e.ts`, '', 'typescript');
+        }
+        if (Config.getConfigurable().include_spec) {
+            Common.readTmplAndWrite(`${Config.installationPath()}/templates/markdown-reader/markdown-reader.spec.ts.tmpl`, `${appPath}/src/components/markdown-reader/markdown-reader.spec.ts`, '', 'typescript');
+        }
         Common.readTmplAndWrite(`${Config.installationPath()}/templates/markdown-reader/markdown-reader.tsx.tmpl`, `${appPath}/src/components/markdown-reader/markdown-reader.tsx`, '', 'typescript');
         Common.readTmplAndWrite(`${Config.installationPath()}/templates/markdown-reader/markdown-reader.scss.tmpl`, `${appPath}/src/components/markdown-reader/markdown-reader.scss`, '', 'scss');
         Common.successMessage('register markdown-page');
