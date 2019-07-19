@@ -5,17 +5,33 @@ const ComponentsCreator = require('./components-creator');
 const prompt = require('prompt');
 
 module.exports = {
-  configurables() {
+  configurables(array) {
     const promise = new Promise((resolve, reject) => {
-      prompt.start();
-      prompt.get([
+      const scheme = [
+        ((array.length < 3) ? {
+          ask: () => array.length < 3,
+          name: 'type',
+          description: 'What do you want to create?\n - project\n - page\n - molecule\n',
+          default: 'project',
+          pattern: /(project|page|molecule)/gm
+        } : null),
+        ((array.length < 4) ? {
+          ask: () => array.length < 4,
+          name: 'name',
+          description: 'How do you want to call it?',
+          default: 'app-name',
+          pattern: /[a-zA-Z_-]/gm
+        } : null),
         {
+          ask: () => (prompt.history('type') || {}).value === 'project' || array[2] === 'project',
           name: 'molecule_prefix',
           default: 'fl',
           description: 'Which prefix do you choose for your molecules?',
           pattern: /^[a-zA-Z]+$/gm
         }
-      ], (err, result) => {
+      ].filter(field => !!field);
+      prompt.start();
+      prompt.get(scheme, (err, result) => {
         if (err) {
           reject(err)
         }
@@ -23,7 +39,17 @@ module.exports = {
       })
     })
       .then(result => {
-        Config.setConfigurable(result);
+        if (result) {
+          array = [
+            ...array,
+            ...((result.type) ? [result.type] : []),
+            ...((result.name) ? [result.name] : [])
+          ]
+          if (result.type === 'project') {
+            Config.setConfigurable(result);
+          }
+          return array;
+        }
       })
       .catch(err => {
         Common.exitWithError('While retrieving configuration', err);
