@@ -66,13 +66,6 @@ module.exports = {
       .then(result => {
         const confirmRegex = /^([Y|y]([E|e][S|s])?)+$/;
         if (result) {
-          console.log(
-            result,
-            confirmRegex,
-            confirmRegex.test(result.include_etoe),
-            confirmRegex.test(result.include_spec),
-            confirmRegex.test(result.include_md_reader)
-          )
           result.include_etoe = confirmRegex.test(result.include_etoe);
           result.include_spec = confirmRegex.test(result.include_spec);
           result.include_md_reader = confirmRegex.test(result.include_md_reader);
