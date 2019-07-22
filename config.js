@@ -27,7 +27,7 @@ module.exports = {
     appName: 'fl-stencil-cli',
     configurable: {
         molecule_prefix: 'fl',
-        include_e2e: true,
+        include_etoe: true,
         include_spec: true,
         include_md_reader: true
     },

@@ -40,7 +40,9 @@ module.exports = {
     startProjectStructure(appName) {
         const appPath = `./${appName}`;
         Common.createFolderSync(`${appPath}/src/components/app`);
-        Common.createFolderSync(`${appPath}/src/components/markdown-reader`);
+        if (Config.getConfigurable().include_md_reader) {
+            Common.createFolderSync(`${appPath}/src/components/markdown-reader`);
+        }
         Common.createFolderSync(`${appPath}/src/assets/fonts`);
         Common.createFolderSync(`${appPath}/src/assets/images`, false);
         Common.createFolderSync(`${appPath}/src/assets/mocks`, false);
@@ -77,7 +79,7 @@ module.exports = {
     },
     createApp() {
         const appPath = `./`;
-        if (Config.getConfigurable().include_e2e) {
+        if (Config.getConfigurable().include_etoe) {
             Common.readTmplAndWrite(`${Config.installationPath()}/templates/app/app.e2e.ts.tmpl`, `${appPath}/src/components/app/app.e2e.ts`, '', 'typescript');
         }
         if (Config.getConfigurable().include_spec) {
@@ -89,7 +91,7 @@ module.exports = {
     },
     createMarkdownReader() {
         const appPath = `./`;
-        if (Config.getConfigurable().include_e2e) {
+        if (Config.getConfigurable().include_etoe) {
             Common.readTmplAndWrite(`${Config.installationPath()}/templates/markdown-reader/markdown-reader.e2e.ts.tmpl`, `${appPath}/src/components/markdown-reader/markdown-reader.e2e.ts`, '', 'typescript');
         }
         if (Config.getConfigurable().include_spec) {

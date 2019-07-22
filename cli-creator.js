@@ -7,7 +7,7 @@ const prompt = require('prompt');
 module.exports = {
   configurables(array) {
     const promise = new Promise((resolve, reject) => {
-      const confirmRegex = /^([Y|y][E|e][S|s])+$/gm;
+      const ynRegex = /^([Y|y]([E|e][S|s])?|[N|n]([O|o])?)+$/
       const scheme = [
         ((array.length < 3) ? {
           ask: () => array.length < 3,
@@ -33,23 +33,26 @@ module.exports = {
         {
           ask: () => (prompt.history('type') || {}).value === 'project' || array[2] === 'project',
           name: 'include_spec',
-          default: 'YES',
-          description: 'Include E2E tests?',
-          pattern: /^([Y|y][E|e][S|s]|[N|n][O|o])+$/gm
+          default: 'Y',
+          message: 'You should answer Yes/No',
+          description: 'Include Unit tests?(Y/N)',
+          pattern: ynRegex
         },
         {
           ask: () => (prompt.history('type') || {}).value === 'project' || array[2] === 'project',
-          name: 'include_e2e',
-          default: 'YES',
-          description: 'Include Unit tests?',
-          pattern: /^([Y|y][E|e][S|s]|[N|n][O|o])+$/gm
+          name: 'include_etoe',
+          default: 'Y',
+          message: 'You should answer Yes/No',
+          description: 'Include E2E tests?(Y/N)',
+          pattern: ynRegex
         },
         {
           ask: () => (prompt.history('type') || {}).value === 'project' || array[2] === 'project',
           name: 'include_md_reader',
-          default: 'YES',
-          description: 'Include MD READER feature?',
-          pattern: /^([Y|y][E|e][S|s]|[N|n][O|o])+$/gm
+          default: 'Y',
+          message: 'You should answer Yes/No',
+          description: 'Include MD READER feature?(Y/N)',
+          pattern: ynRegex
         }
       ].filter(field => !!field);
       prompt.start();
@@ -61,8 +64,16 @@ module.exports = {
       })
     })
       .then(result => {
+        const confirmRegex = /^([Y|y]([E|e][S|s])?)+$/;
         if (result) {
-          result.include_e2e = confirmRegex.test(result.include_e2e);
+          console.log(
+            result,
+            confirmRegex,
+            confirmRegex.test(result.include_etoe),
+            confirmRegex.test(result.include_spec),
+            confirmRegex.test(result.include_md_reader)
+          )
+          result.include_etoe = confirmRegex.test(result.include_etoe);
           result.include_spec = confirmRegex.test(result.include_spec);
           result.include_md_reader = confirmRegex.test(result.include_md_reader);
           array = [
