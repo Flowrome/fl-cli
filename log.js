@@ -1,14 +1,19 @@
 const chalk = require('chalk');
+const fs = require('fs');
+const Config = require('./config');
+const { ASCIILOGO } = require('./consts');
 
 module.exports = {
     logLabel: {
         log: 'Logging:',
+        welcome: 'Welcome:',
         warn: 'Warning:',
         error: 'Error',
     },
 
     logType: {
         log: 'log',
+        welcome: 'welcome',
         warn: 'warn',
         error: 'error',
     },
@@ -52,6 +57,13 @@ module.exports = {
         } else {
             console.log(log);
         }
+        console.groupEnd();
+    },
+
+    cwelcome() {
+        const version = JSON.parse(fs.readFileSync(`${Config.installationPath()}/package.json`, 'UTF-8')).version;
+        console.group(this.logStyle[this.logType.log](this.logLabel[this.logType.welcome]))
+        console.log(ASCIILOGO(version));
         console.groupEnd();
     }
 

@@ -1,25 +1,6 @@
 const fs = require('fs');
-const prettier = require('prettier');
 const { getInstalledPathSync } = require('get-installed-path');
 const { ENVS } = require('./consts');
-
-const prettyOpts = (parser) => ({
-    arrowParens: 'avoid',
-    bracketSpacing: true,
-    htmlWhitespaceSensitivity: 'css',
-    insertPragma: false,
-    jsxBracketSameLine: false,
-    jsxSingleQuote: false,
-    parser: parser,
-    printWidth: 80,
-    proseWrap: 'preserve',
-    requirePragma: false,
-    semi: true,
-    singleQuote: true,
-    tabWidth: 2,
-    trailingComma: 'all',
-    useTabs: false
-});
 
 module.exports = {
     env: ENVS.PROD,

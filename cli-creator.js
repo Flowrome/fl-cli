@@ -1,10 +1,16 @@
 const Common = require('./common');
 const Config = require('./config');
+const log = require('./log');
 const ProjectCreator = require('./project-creator');
 const ComponentsCreator = require('./components-creator');
 const prompt = require('prompt');
 
 module.exports = {
+  welcome() {
+    return Promise.resolve().then(() => {
+      log.cwelcome();
+    })
+  },
   configurables(array) {
     const promise = new Promise((resolve, reject) => {
       const ynRegex = /^([Y|y]([E|e][S|s])?|[N|n]([O|o])?)+$/
