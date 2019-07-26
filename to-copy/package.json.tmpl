@@ -1,7 +1,7 @@
 {
   "name": "[TMPL_NAME]",
-  "version": "0.0.1",
-  "description": "Stencil Component Starter",
+  "version": "1.0.0",
+  "description": "FLCLI Stencil project starter",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "es2015": "dist/esm/index.mjs",
@@ -18,6 +18,9 @@
     "type": "git"
   },
   "scripts": {
+    "create-molecule": "flcli molecule",
+    "create-page": "flcli page",
+  
     "start": "node ./fl-stencil-env-chooser.js",
     "start-dev": "node ./fl-stencil-env-chooser.js env=dev",
     "start-prod": "node ./fl-stencil-env-chooser.js env=prod",
