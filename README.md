@@ -113,7 +113,7 @@ You can use those evolution:
 * **``` npm run readme ```**: This script compile the auto-readme of your components keeping the precedent one you already wrote. to recompile the default readme just delete the current one and run this script
 
 ## ENVIRONMENTS
-You can use every environm ent you want, just create an env file inside **./src/envs** folder with this nomenclature env.**[ENV_NAME]**.ts. You can access to the file importing:
+You can use every environm ent you want, just create an env file inside **./src/envs** folder with this nomenclature ```env.**[ENV_NAME]**.ts```. You can access to the file importing:
 ``` js
 import { Environment } from '@env';
 ```
