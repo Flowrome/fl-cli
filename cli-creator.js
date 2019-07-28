@@ -80,7 +80,7 @@ module.exports = {
             ...((result.type) ? [result.type] : []),
             ...((result.name) ? [result.name] : [])
           ]
-          if (result.type === 'project') {
+          if (result.type === 'project' || array[2] === 'project') {
             Config.setConfigurable(result);
           }
           return array;
