@@ -1,0 +1,59 @@
+{
+  "name": "[TMPL_NAME]",
+  "version": "1.0.0",
+  "description": "FLCLI Stencil project starter",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "es2015": "dist/esm/index.mjs",
+  "es2017": "dist/esm/index.mjs",
+  "types": "dist/types/index.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
+  "unpkg": "dist/[TMPL_NAME]/[TMPL_NAME].js",
+  "files": [
+    "dist/",
+    "loader/"
+  ],
+  "repository": {
+    "type": "git"
+  },
+  "scripts": {
+    "create-molecule": "flcli molecule",
+    "create-page": "flcli page",
+  
+    "start": "node ./fl-stencil-env-chooser.js",
+    "start-dev": "node ./fl-stencil-env-chooser.js env=dev",
+    "start-prod": "node ./fl-stencil-env-chooser.js env=prod",
+    "build": "npm run start compile",
+    "build-dev": "npm run start-dev compile",
+    "build-prod": "npm run start-prod compile",
+
+    "spec-test": "stencil test --spec",
+    "e2e-test": "stencil test --e2e",
+
+    "compile-start": "stencil build --dev --watch --serve",
+    "compile": "stencil build --docs",
+
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watchAll"
+  },
+  "devDependencies": {
+    "@stencil/core": "^1.0.7"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@stencil/router": "^1.0.1",
+    "@stencil/sass": "^1.0.1",
+    "@stencil/postcss": "^1.0.1",
+    "@types/autoprefixer": "^9.5.0",
+    "autoprefixer": "^9.6.1",
+    "glob": "^7.1.4",
+    "glob-promise": "^3.4.0",
+    "rollup-plugin-alias": "^1.5.2"
+  },
+  "outputTargets": [
+    {
+      "type": "dist"
+    }
+  ]
+}

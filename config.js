@@ -27,12 +27,12 @@ module.exports = {
                 return configurable.configuration[path];
         }
     },
-    getConfigurable() {
+    getConfigurable(isStartingProject = false) {
         switch (this.env) {
             case ENVS.DEV:
                 return this.configurable;
             case ENVS.PROD:
-                const configurable = JSON.parse(fs.readFileSync('./fl-stencil-config.json', 'UTF-8'));
+                const configurable = (isStartingProject) ? {configuration: this.configurable} : JSON.parse(fs.readFileSync('./fl-stencil-config.json', 'UTF-8'));
                 return configurable.configuration;
         }
     },

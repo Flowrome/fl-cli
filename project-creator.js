@@ -49,6 +49,13 @@ module.exports = {
     },
     copyStencilFiles(appName) {
         const appPath = `./${appName}`;
+
+        Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/fl-stencil-config.json.tmpl`, `${appPath}/fl-stencil-config.json`, [_.kebabCase(appName), JSON.stringify(Config.configurable)], 'json', [Config.toReplace, /\[TMPL_CONFIGURATION\]/g]);
+        if (Config.getConfigurable(true).include_md_reader) {
+            Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/fl-stencil-md-reader.js.tmpl`, `${appPath}/fl-stencil-md-reader.js`, '', 'babel');
+        }
+        Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/fl-stencil-env-chooser.js.tmpl`, `${appPath}/fl-stencil-env-chooser.js`, '', 'babel');
+
         const promise = Promise.all([
             new Promise((resolve, reject) => ncp(`${Config.installationPath()}/to-copy/src/styles`, `${appPath}/src/styles`, (err) => (err ? reject(err) : resolve()))),
             new Promise((resolve, reject) => ncp(`${Config.installationPath()}/to-copy/src/assets`, `${appPath}/src/assets`, (err) => (err ? reject(err) : resolve()))),
@@ -59,16 +66,13 @@ module.exports = {
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/src/index.ts.tmpl`, `${appPath}/src/index.ts`, '', 'typescript')
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/src/index.html.tmpl`, `${appPath}/src/index.html`, _.kebabCase(appName), 'html')
 
-            Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/package.json.tmpl`, `${appPath}/package.json`, _.kebabCase(appName), 'json');
+            Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/package.json${(Config.getConfigurable(true).include_md_reader) ? '' : '[NO_MD_READER]'}.tmpl`, `${appPath}/package.json`, _.kebabCase(appName), 'json');
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/stencil.config.ts.tmpl`, `${appPath}/stencil.config.ts`, _.kebabCase(appName), 'typescript');
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/LICENSE.tmpl`, `${appPath}/LICENSE`, '');
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/readme.md.tmpl`, `${appPath}/readme.md`, '', 'markdown');
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/tsconfig.json.tmpl`, `${appPath}/tsconfig.json`, '', 'json');
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/.editorconfig.tmpl`, `${appPath}/.editorconfig`, '');
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/.gitignore.tmpl`, `${appPath}/.gitignore`, '');
-            Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/fl-stencil-config.json.tmpl`, `${appPath}/fl-stencil-config.json`, [_.kebabCase(appName), JSON.stringify(Config.configurable)], 'json', [Config.toReplace, /\[TMPL_CONFIGURATION\]/g]);
-            Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/fl-stencil-md-reader.js.tmpl`, `${appPath}/fl-stencil-md-reader.js`, '', 'babel');
-            Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/fl-stencil-env-chooser.js.tmpl`, `${appPath}/fl-stencil-env-chooser.js`, '', 'babel');
             Common.successMessage('copied succsesfully stencil files');
         }).catch((error) => {
             Common.exitWithError(error);
