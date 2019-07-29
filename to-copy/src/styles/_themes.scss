@@ -7,5 +7,9 @@ $theme: (
 );
 
 @function color($keys...) {
-  @return deep-scan($theme, $keys);
+  $map: $theme;
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
 }
