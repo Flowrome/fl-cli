@@ -10,7 +10,7 @@ export class [TMPL_NAME:CLASS_CASE]Molecule {
   @Prop() history: RouterHistory;
   @Prop() text: string = '[TMPL_NAME]-molecule';
 
-  private goToReadmePage() {
+  private goToReadmePage(): void {
     this.history.push({
       key: 'md-reader[[TMPL_NAME]]',
       scrollPosition: [0, 0],
@@ -21,7 +21,7 @@ export class [TMPL_NAME:CLASS_CASE]Molecule {
     });
   }
 
-  render() {
+  render(): any {
     return <p>You are in {this.text}</p>;
   }
 }

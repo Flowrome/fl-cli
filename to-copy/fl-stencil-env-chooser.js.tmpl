@@ -11,6 +11,16 @@ let choosedEnv = '';
 const envArgv = argv.findIndex(arg => arg.indexOf('env=') > -1);
 const env = envArgv > -1 ? argv[envArgv].replace('env=', '') : '';
 
+const mocksPaths = `.${pathDivider}src${pathDivider}assets${pathDivider}mocks`;
+const readmeJsonPath = `.${pathDivider}src${pathDivider}assets${pathDivider}mocks${pathDivider}readmes.json`;
+        
+if (!fs.existsSync(mocksPaths)) {
+  fs.mkDirSync(mocksPaths)
+}        
+
+if (!fs.existsSync(readmeJsonPath)) {
+  fs.writeFileSync(readmeJsonPath, '{}');
+}
 
 if (envArgv > -1 && fs.existsSync(`${patternEnvs}/env.${env}.ts`)) {
   choosedEnv = `${patternEnvs}${pathDivider}env.${env}.ts`;
