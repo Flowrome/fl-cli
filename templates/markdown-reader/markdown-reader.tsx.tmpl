@@ -8,14 +8,14 @@ import marked from '../../../node_modules/marked/marked.min';
 	styleUrl: 'markdown-reader.scss'
 })
 export class MarkdownReaderPage {
-	@Prop() history: RouterHistory;
-	@Element() element: HTMLElement;
+	@Prop() public history: RouterHistory;
+	@Element() public element: HTMLElement;
 
 	private id: string;
 	private name: string;
 	private md: string;
 
-	async componentWillLoad(): void {
+	public async componentWillLoad(): void {
 		mermaid.initialize({ startOnLoad: true });
 		this.id = this.history.location.query.id;
 		await import('../../assets/mocks/readmes.json').then((readmes: any) => {
@@ -27,7 +27,7 @@ export class MarkdownReaderPage {
 		});
 	}
 
-	componentDidLoad(): void {
+	public componentDidLoad(): void {
 		this.element
 			.querySelector('#md-container-section')
 			.querySelectorAll('.mermaid, .language-mermaid')
@@ -40,7 +40,7 @@ export class MarkdownReaderPage {
 			});
 	}
 
-	render(): any {
+	public render(): any {
 		return (
 			<main class="main-container">
 				<header class="default-header">

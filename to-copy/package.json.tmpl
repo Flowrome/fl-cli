@@ -39,7 +39,16 @@
 
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll"
+
+    "prettier": "npx prettier --write \"src/**/*.{js,ts,tsx,scss}\"",
+    "tslint": "npx tslint -c ./tslint.json --project ./tsconfig.json",
+    "tslint:fix": "npx tslint --fix -c ./tslint.json --project ./tsconfig.json",
+    "prettier:tslint": "npm run prettier && npm run tslint:fix"
   },
+  "pre-commit": [
+    "prettier",
+    "tslint:fix"
+  ],
   "devDependencies": {
     "@stencil/core": "^1.0.7"
   },

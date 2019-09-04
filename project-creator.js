@@ -71,6 +71,8 @@ module.exports = {
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/LICENSE.tmpl`, `${appPath}/LICENSE`, '');
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/readme.md.tmpl`, `${appPath}/readme.md`, '', 'markdown');
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/tsconfig.json.tmpl`, `${appPath}/tsconfig.json`, '', 'json');
+            Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/tslint.json.tmpl`, `${appPath}/tslint.json`, '', 'json');
+            Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/.prettierrc.tmpl`, `${appPath}/.prettierrc`, '', 'json');
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/.editorconfig.tmpl`, `${appPath}/.editorconfig`, '');
             Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/.gitignore.tmpl`, `${appPath}/.gitignore`, '');
             Common.successMessage('copied succsesfully stencil files');
