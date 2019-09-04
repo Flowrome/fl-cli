@@ -15,7 +15,7 @@ const mocksPaths = `.${pathDivider}src${pathDivider}assets${pathDivider}mocks`;
 const readmeJsonPath = `.${pathDivider}src${pathDivider}assets${pathDivider}mocks${pathDivider}readmes.json`;
         
 if (!fs.existsSync(mocksPaths)) {
-  fs.mkDirSync(mocksPaths)
+  fs.mkdirSync(mocksPaths)
 }        
 
 if (!fs.existsSync(readmeJsonPath)) {

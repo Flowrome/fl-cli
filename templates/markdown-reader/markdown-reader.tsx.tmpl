@@ -15,7 +15,7 @@ export class MarkdownReaderPage {
 	private name: string;
 	private md: string;
 
-	public async componentWillLoad(): void {
+	public async componentWillLoad(): : Promise<void> {
 		mermaid.initialize({ startOnLoad: true });
 		this.id = this.history.location.query.id;
 		await import('../../assets/mocks/readmes.json').then((readmes: any) => {
