@@ -1,6 +1,6 @@
 {
   "name": "fl-stencil-cli",
-  "version": "1.0.0-10",
+  "version": "1.0.0-11",
   "description": "",
   "main": "./indexes/index.prod.js",
   "scripts": {
@@ -10,8 +10,9 @@
     "start:new:molecule": "node ./indexes/index.dev.js molecule prova-molecule",
     "test": "echo \"Error: no test specified\" && exit 1",
     "make-me-pretty": "npx prettier --write \"./**/*.{js,ts,json,scss}\"",
-    "test-check-version": "node ",
-    "check-version": "node check-version.js"
+    "test-check-version": "node",
+    "check-version": "node check-version.js",
+    "precommit": "npm run check-version && npm run make-me-pretty"
   },
   "author": "Flowrome",
   "license": "ISC",
