@@ -9,26 +9,30 @@ module.exports = {
   welcome() {
     return Promise.resolve().then(() => {
       log.cwelcome();
-    })
+    });
   },
   configurables(array) {
     const promise = new Promise((resolve, reject) => {
-      const ynRegex = /^([Y|y]([E|e][S|s])?|[N|n]([O|o])?)+$/
+      const ynRegex = /^([Y|y]([E|e][S|s])?|[N|n]([O|o])?)+$/;
       const scheme = [
-        ((array.length < 3) ? {
-          ask: () => array.length < 3,
-          name: 'type',
-          description: 'What do you want to create?\n - project\n - page\n - molecule\n',
-          default: 'project',
-          pattern: /(project|page|molecule)/gm
-        } : null),
-        ((array.length < 4) ? {
-          ask: () => array.length < 4,
-          name: 'name',
-          description: 'How do you want to call it?',
-          default: 'app-name',
-          pattern: /[a-zA-Z_-]/gm
-        } : null),
+        array.length < 3
+          ? {
+              ask: () => array.length < 3,
+              name: 'type',
+              description: 'What do you want to create?\n - project\n - page\n - molecule\n',
+              default: 'project',
+              pattern: /(project|page|molecule)/gm
+            }
+          : null,
+        array.length < 4
+          ? {
+              ask: () => array.length < 4,
+              name: 'name',
+              description: 'How do you want to call it?',
+              default: 'app-name',
+              pattern: /[a-zA-Z_-]/gm
+            }
+          : null,
         {
           ask: () => (prompt.history('type') || {}).value === 'project' || array[2] === 'project',
           name: 'molecule_prefix',
@@ -64,10 +68,10 @@ module.exports = {
       prompt.start();
       prompt.get(scheme, (err, result) => {
         if (err) {
-          reject(err)
+          reject(err);
         }
         resolve(result);
-      })
+      });
     })
       .then(result => {
         const confirmRegex = /^([Y|y]([E|e][S|s])?)+$/;
@@ -75,11 +79,7 @@ module.exports = {
           result.include_etoe = confirmRegex.test(result.include_etoe);
           result.include_spec = confirmRegex.test(result.include_spec);
           result.include_md_reader = confirmRegex.test(result.include_md_reader);
-          array = [
-            ...array,
-            ...((result.type) ? [result.type] : []),
-            ...((result.name) ? [result.name] : [])
-          ]
+          array = [...array, ...(result.type ? [result.type] : []), ...(result.name ? [result.name] : [])];
           if (result.type === 'project' || array[2] === 'project') {
             Config.setConfigurable(result);
           }
@@ -94,7 +94,12 @@ module.exports = {
   },
   decide(val, index, array) {
     if (array.length < 3) {
-      Common.exitWithError(`Please decide what you want to create`, 'Project: project', 'Page: page', 'Molecule: molecule');
+      Common.exitWithError(
+        `Please decide what you want to create`,
+        'Project: project',
+        'Page: page',
+        'Molecule: molecule'
+      );
     }
     if (array.length < 4) {
       Common.exitWithError(`You have not inserted the ${array[2]} name`);
@@ -112,9 +117,14 @@ module.exports = {
           ComponentsCreator.createMolecule(name);
           break;
         default:
-          Common.exitWithError(`Please decide what you want to create`, 'Project: project', 'Page: page', 'Molecule: molecule');
+          Common.exitWithError(
+            `Please decide what you want to create`,
+            'Project: project',
+            'Page: page',
+            'Molecule: molecule'
+          );
           break;
       }
     }
   }
-}
+};

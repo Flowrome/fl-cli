@@ -2,10 +2,10 @@ $fonts-path: '../assets/fonts';
 $fonts-name: 'raleway_thin-webfont';
 
 @font-face {
-  font-family: "Raleway";
-  src: url("#{$fonts_path}/#{$fonts_name}.eot") format("embedded-opentype"),
-    url("#{$fonts_path}/#{$fonts_name}.woff") format("woff"),
-    url("#{$fonts_path}/#{$fonts_name}.ttf") format("truetype");
+  font-family: 'Raleway';
+  src: url('#{$fonts_path}/#{$fonts_name}.eot') format('embedded-opentype'),
+    url('#{$fonts_path}/#{$fonts_name}.woff') format('woff'),
+    url('#{$fonts_path}/#{$fonts_name}.ttf') format('truetype');
 }
 
 @mixin default-font() {

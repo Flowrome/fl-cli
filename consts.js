@@ -1,9 +1,9 @@
 module.exports = {
-    ENVS: {
-        DEV: 'dev',
-        PROD: 'prod',
-    },
-    ASCIILOGO: (version) => `                                                 
+  ENVS: {
+    DEV: 'dev',
+    PROD: 'prod'
+  },
+  ASCIILOGO: version => `                                                 
      _______   __         ______   __        __ 
     |   ____| |  |       /      | |  |      |  |
     |  |__    |  |      |  ,----' |  |      |  |
@@ -11,4 +11,4 @@ module.exports = {
     |  |      |  '----. |  '----. |  '----. |  |
     |__|      |_______|  \\______| |_______| |__| VERSION: ${version}    
 `
-}
+};

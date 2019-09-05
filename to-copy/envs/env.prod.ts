@@ -1,3 +1,3 @@
 export const Environment = {
-    prod: true
-}
+  prod: true
+};
