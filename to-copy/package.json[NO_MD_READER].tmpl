@@ -35,10 +35,23 @@
     "compile": "stencil build --docs",
 
     "test": "stencil test --spec --e2e",
-    "test.watch": "stencil test --spec --e2e --watchAll"
+    "test.watch": "stencil test --spec --e2e --watchAll",
+
+    "prettier": "npx prettier --write \"src/**/*.{js,ts,tsx,scss}\"",
+    "tslint": "npx tslint -c ./tslint.json --project ./tsconfig.json",
+    "tslint:fix": "npx tslint --fix -c ./tslint.json --project ./tsconfig.json",
+    "prettier:tslint": "npm run prettier && npm run tslint:fix"
   },
+  "pre-commit": [
+    "prettier",
+    "tslint:fix"
+  ],
   "devDependencies": {
-    "@stencil/core": "^1.0.7"
+    "@stencil/core": "^1.0.7",
+    "pre-commit": "^1.2.2",
+    "prettier": "1.18.2",
+    "tslint": "^5.10.0",
+    "tslint-react": "^3.6.0"
   },
   "license": "MIT",
   "dependencies": {
