@@ -14,6 +14,10 @@
     "check-version": "node check-version.js",
     "precommit": "npm run check-version && npm run make-me-pretty"
   },
+  "repository": {
+    "url": "https://github.com/Flowrome/fl-cli.git",
+    "type": "git"
+  },
   "author": "Flowrome",
   "license": "ISC",
   "bin": {
