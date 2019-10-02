@@ -1,7 +1,10 @@
+// RESET DEFAULT STYLES
+@import 'reset';
+// END RESET DEFAULT STYLES
+
 @import 'variables';
 @import 'functions';
 @import 'themes';
 @import 'mixins';
-@import 'fonts';
 @import 'common';
 @import 'layout';

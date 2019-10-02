@@ -12,8 +12,8 @@ export const config: Config = {
       esmLoaderPath: '../loader',
       copy: [
         {
-          src: require('path').resolve('./src/assets/'),
-          dest: require('path').resolve('./dist/assets/')
+          src: require('path').resolve('./src/assets/fonts'),
+          dest: require('path').resolve('./dist/assets/fonts')
         }
       ],
     },
@@ -25,11 +25,11 @@ export const config: Config = {
       serviceWorker: null // disable service workers
     }
   ],
-  globalStyle: 'src/styles/_styles.scss',
+  globalStyle: 'src/styles/_styles.scss', // THIS ONE WILL BE EXPORTED IN [TMPL_NAME].css
   plugins: [
     sass({
       injectGlobalPaths: [
-        'src/styles/_styles.scss',
+        'src/styles/_local-styles.scss', // THIS ONE WILL BE INJECTED INSIDE THE COMPONENTS
       ]
     }),
     postcss({

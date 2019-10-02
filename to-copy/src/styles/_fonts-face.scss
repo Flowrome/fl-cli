@@ -7,13 +7,3 @@ $fonts-name: 'raleway_thin-webfont';
     url('#{$fonts_path}/#{$fonts_name}.woff') format('woff'),
     url('#{$fonts_path}/#{$fonts_name}.ttf') format('truetype');
 }
-
-@mixin default-font() {
-  font-family: 'Raleway', monospace;
-  font-weight: 400;
-}
-
-:root {
-  font-size: 62.5%;
-  @include default-font();
-}
