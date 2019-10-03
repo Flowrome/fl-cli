@@ -38,10 +38,11 @@ module.exports = {
         return configurable.configuration;
     }
   },
-  installationPath() {
+  installationPath(goBack = false) {
+    console.log(process.cwd());
     switch (this.env) {
       case ENVS.DEV:
-        return '.';
+        return (goBack) ? '..' : '.';
       case ENVS.PROD:
         return getInstalledPathSync(this.appName);
     }

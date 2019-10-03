@@ -1,44 +1,44 @@
 :root {
   font-size: 62.5%;
   @include default-font();
-  .container-fluid {
-    margin: 0 auto;
-    width: 100%;
-    max-width: $container-fluid-max;
-    padding: 0 size(14px);
-    box-sizing: border-box;
-  }
+}
 
-  .main-container {
-    width: 100%;
+.container-fluid {
+  margin: 0 auto;
+  width: 100%;
+  max-width: $container-fluid-max;
+  padding: 0 size(14px);
+  box-sizing: border-box;
+}
+
+.main-container {
+  width: 100%;
+  max-height: calc(100% - #{size($header-height)});
+  overflow-x: hidden;
+  overflow: auto;
+}
+
+.default-header {
+  height: size($header-height);
+  width: 100%;
+  background-color: color(white, primary);
+  &__content {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
     height: 100%;
-    overflow-x: hidden;
-    overflow: auto;
-  }
-
-  .default-header {
-    height: size($header-height);
-    width: 100%;
-    background-color: color(white, primary);
-    &__content {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      align-items: center;
-      height: 100%;
-      h1 {
-        font-size: size(22px);
-      }
+    h1 {
+      font-size: size(22px);
     }
   }
+}
 
-  .page {
-    margin-top: 18px;
-    max-height: calc(100% - #{size($header-height)} - 18px);
-    overflow: hidden;
-    overflow-y: auto;
-    h2 {
-      font-size: size(16px);
-    }
+.page {
+  margin-top: 18px;
+  overflow: hidden;
+  overflow-y: auto;
+  h2 {
+    font-size: size(16px);
   }
 }

@@ -1,0 +1,262 @@
+import { Component, Prop, h } from '@stencil/core';
+
+// YOU CAN REMOVE THIS PAGE
+
+@Component({
+  tag: 'welcome-page',
+  styleUrl: 'welcome.page.scss',
+  shadow: true
+})
+export class WelcomePage {
+  @Prop() public headerTitle: string = <h1>Welcome to FL-CLI</h1>;
+  @Prop() public sectionTitle: string = <h2>welcome.page SECTION</h2>;
+
+  private githubSVG: HTMLElement = (
+    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+    </svg>
+  );
+  private flcliSVG: HTMLElement = (
+    <svg role="img" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+      <g>
+        <path d="M511,41C511,18.909 493.091,1 471,1L41.016,1C30.403,1 20.225,5.216 12.72,12.72C5.216,20.225 1,30.403 1,41.016L1,471C1,493.091 18.909,511 41,511L471,511C493.091,511 511,493.091 511,471L511,41ZM332.317,347.576C382.892,347.577 423.89,388.575 423.89,439.15L423.89,439.153L271.26,439.153C220.685,439.153 179.686,398.154 179.686,347.579L179.686,347.576L332.317,347.576ZM87.104,110.828C100.398,142.881 130.79,166.052 164.424,171.617L164.424,197.861C136.16,197.857 107.895,197.917 79.631,197.917L79.631,206.413C79.634,207.401 79.65,208.389 79.687,209.376C81.241,250.255 117.565,283.191 156.291,283.556C159.002,283.565 161.713,283.572 164.424,283.579L164.424,341.471C164.424,395.419 120.69,439.153 66.742,439.153L66.742,439.153C66.742,439.153 66.742,279.041 66.742,170.529C66.742,148.045 74.338,127.336 87.104,110.828ZM347.576,210.212L347.576,170.529C347.576,116.581 391.31,72.847 445.258,72.847L445.258,72.847L445.258,341.471C445.258,363.955 437.662,384.664 424.896,401.172C411.602,369.119 381.21,345.948 347.576,340.383L347.576,332.314L347.576,210.212ZM271.263,275.078L271.263,275.078C271.263,237.146 240.513,206.396 202.58,206.396C150.603,206.396 88.11,206.396 88.11,206.396L88.11,206.399C88.11,244.33 118.859,275.078 156.789,275.078L271.263,275.078ZM332.314,164.424L332.314,164.421C332.314,113.846 291.315,72.847 240.74,72.847L88.11,72.847L88.11,72.85C88.11,123.425 129.109,164.424 179.683,164.424L332.314,164.424Z" />
+      </g>
+    </svg>
+  );
+  public render(): any {
+    return [
+      <header class="default-header welcome-page-header">
+        <div class="default-header__content container-fluid">
+          {this.headerTitle}
+          <a href="https://github.com/Flowrome/fl-cli" target="_blank" class="right-icon">
+            {this.flcliSVG}
+          </a>
+          <a href="https://github.com/Flowrome" target="_blank" class="right-icon">
+            {this.githubSVG}
+          </a>
+        </div>
+      </header>,
+      <main class="main-container">
+        <section class="page container-fluid">
+          <h1 id="flowrome-stencil-cli">FLOWROME STENCIL CLI</h1>
+          <p>
+            <a href="https://github.com/Flowrome">
+              <img src="../assets/images/logo-bw-little.png" style={{'margin-right': '10px'}} />
+            </a>
+            This project is a CLI to create your own <strong>web-components library / website</strong> project using{' '}
+            <a href="https://www.webcomponents.org/">Web-Components</a>, <a href="https://stenciljs.com/">Stencil</a>,
+            <a href="https://github.com/ionic-team/stencil-router">Stencil/router</a> ,{' '}
+            <a href="https://sass-lang.com/">SCSS</a>, <a href="https://www.typescriptlang.org/">Typescript</a> and{' '}
+            <a href="https://it.reactjs.org/docs/introducing-jsx.html">JSX</a>.<br />
+            <br />
+            <br />
+            <br />
+          </p>
+          <h2 id="installation">INSTALLATION</h2>
+          <pre>
+            <code>
+              git clone https://Flowrome@bitbucket.org/Flowrome/fl-stencil-cli.git npm i -g /path/to/fl-stencil-cli/
+            </code>
+          </pre>
+          <h2 id="usage">USAGE</h2>
+          <ul>
+            <li>
+              <strong>TO CREATE PROJECT SCAFFOLD</strong>:
+              <ul>
+                <li>
+                  <pre>
+                    <code> flcli project [PROJECT_NAME]</code>
+                  </pre>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>TO CREATE A PAGE (you need to be inside a fl-project)</strong>:
+              <ul>
+                <li>
+                  <pre>
+                    <code> flcli page [PAGE_NAME]</code>
+                  </pre>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>TO CREATE A MOLECULE (you need to be inside a fl-project)</strong>:
+              <ul>
+                <li>
+                  <pre>
+                    <code> flcli molecule [MOLECULE_NAME]</code>
+                  </pre>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <h2 id="scaffold-structure">SCAFFOLD STRUCTURE</h2>
+          <pre>
+            <code class="language-bash">
+              |-- project-name |-- .editorconfig |-- .gitignore |-- LICENSE |-- fl-stencil-config.json |--
+              fl-stencil-env-chooser.js |-- fl-stencil-md-reader.js |-- package-lock.json |-- package.json |-- readme.md
+              |-- stencil.config.ts |-- tsconfig.json |-- src |-- components.d.ts |-- index.html |-- index.ts |-- assets
+              | |-- fonts | | |-- raleway_thin-webfont.eot | | |-- raleway_thin-webfont.ttf | | |--
+              raleway_thin-webfont.woff | |-- images | |-- mocks | |-- readmes.json |-- components | |-- app | | |--
+              app.e2e.ts | | |-- app.scss | | |-- app.spec.ts | | |-- app.tsx | |-- markdown-reader | |--
+              markdown-reader.e2e.ts | |-- markdown-reader.scss | |-- markdown-reader.spec.ts | |-- markdown-reader.tsx
+              |-- envs | |-- env.dev.ts | |-- env.prod.ts |-- styles | |-- _common.scss | |-- _fonts.scss | |--
+              _functions.scss | |-- _layout.scss | |-- _local-styles.scss | |-- _mixins.scss | |-- _reset.scss | |--
+              _styles.scss | |-- _themes.scss | |-- _variables.scss |-- utils
+            </code>
+          </pre>
+          <h2 id="components">COMPONENTS</h2>
+          <p>Initial components generated by the cli are:</p>
+          <ul>
+            <li>
+              <strong>APP</strong>: App starter component, it contains the Routing structure of your application and
+              it's the component you need to include inside the <strong>index.html</strong> file.
+            </li>
+            <li>
+              <strong>MARKDOWN-READER</strong>: This component is needed to visualize the readme of the molecule/page,
+              its route is
+              <pre>
+                <code>../md-reader?id=[FILE_NAME_OF_COMPONENT]</code>
+              </pre>
+              You can also create those components type:
+            </li>
+            <li>
+              <strong>PAGES</strong>: Pages are the main components of the application, they contain the semantically
+              correct structure you should have in the HTML for a page:{' '}
+              <strong>body -&gt; header, body -&gt; main -&gt; section</strong>. Those components can be generated using
+              <pre>
+                <code class="language-node"> flcli page page-name</code>
+              </pre>
+            </li>
+            <li>
+              <strong>MOLECULES</strong>: Those are the standalone components that will accept{' '}
+              <strong>@Props and @Events</strong>, they shouldn't have the main logic but they should output someething
+              readable by the father. They have this nomenclature [PREFIX_YOU_CHOOSED_AT_START]-[NAME]-molecule. Those
+              components can be generated using
+              <pre>
+                <code class="language-node"> flcli molecule molecule-name</code>
+              </pre>
+            </li>
+          </ul>
+          <h2 id="scripts">SCRIPTS</h2>
+          <p>Those are the scripts available inside the project:</p>
+          <ul>
+            <li>
+              <strong>
+                <code>npm start</code>
+              </strong>
+              : this script start the app in his localhost (starting at <strong>localhost:3333</strong>) and it could be
+              used with this modifier: <strong>env=envName</strong> to choose inside the envs folder which env is used
+              while starting the app. You can use those evolution:
+              <pre>
+                <code class="language-node">
+                  {' '}
+                  npm run start-dev /* equivalent of npm start env=dev */ npm run start-prod /* equivalent of npm start
+                  env=prod */
+                </code>
+              </pre>
+            </li>
+            <li>
+              <strong>
+                <code>npm run build</code>
+              </strong>
+              : this script build your components in the distribution folder (<strong>./dist</strong>), it could be used
+              with this modifier: <strong>env=envName</strong> to choose inside the envs folder which env is used while
+              starting the app. You can use those evolution:
+              <pre>
+                <code class="language-node">
+                  {' '}
+                  npm run build-dev /* equivalent of npm run start-dev compile */ npm run build-prod /* equivalent of
+                  npm run start-prod compile */
+                </code>
+              </pre>
+            </li>
+            <li>
+              <strong>
+                <code>npm run readme</code>
+              </strong>
+              : This script compile the auto-readme of your components keeping the precedent one you already wrote. to
+              recompile the default readme just delete the current one and run this script
+            </li>
+          </ul>
+          <h2 id="environments">ENVIRONMENTS</h2>
+          <p>
+            You can use every environm ent you want, just create an env file inside <strong>./src/envs</strong> folder
+            with this nomenclature <code>env.**[ENV_NAME]**.ts</code>. You can access to the file importing:
+          </p>
+          <pre>
+            <code class="language-js">import {'{Environment}'} from '@env';</code>
+          </pre>
+          <p>after that remember to launch the start or build script with:</p>
+          <pre>
+            <code class="language-node">npm run start/build env=[ENV_NAME]</code>
+          </pre>
+          <h2 id="distribution-aka-dist">DISTRIBUTION (aka dist)</h2>
+          <p>
+            Inside{' '}
+            <strong>
+              <code>dist</code>
+            </strong>{' '}
+            folder you have your minified components for your ui-library (ready to publish on npm), build with{' '}
+            <code>npm run build/build-[ENV]</code>.
+          </p>
+          <h2 id="publishing-aka-www">PUBLISHING (aka www)</h2>
+          <p>
+            Inside{' '}
+            <strong>
+              <code>www</code>
+            </strong>{' '}
+            folder you have your minified website ready for production, build with{' '}
+            <code>npm run build/build-[ENV]</code>.
+          </p>
+          <h2 id="testing">TESTING</h2>
+          <p>
+            You can use the <strong>Unit</strong> or <strong>e2e</strong> as{' '}
+            <a href="https://stenciljs.com/docs/testing-overview">Stencil</a> allows. the <strong>.spec</strong> and{' '}
+            <strong>.e2e</strong> files are automatically generated by the flcli scripts, obviusly you can edit them as
+            you want, at the start of the project you can choose which one to include.
+          </p>
+          <h2 id="thanks-to">THANKS TO</h2>
+          <ul>
+            <li>
+              <a href="https://www.webcomponents.org/">Web-Components</a>
+            </li>
+            <li>
+              <a href="https://stenciljs.com/">Stencil</a>
+            </li>
+            <li>
+              <a href="https://github.com/ionic-team/stencil-router">Stencil/router</a>
+            </li>
+            <li>
+              <a href="https://sass-lang.com/">SCSS</a>
+            </li>
+            <li>
+              <a href="https://www.typescriptlang.org/">Typescript</a>
+            </li>
+            <li>
+              <a href="https://it.reactjs.org/docs/introducing-jsx.html">JSX</a>.
+            </li>
+          </ul>
+          <h2 id="contact-me">CONTACT ME</h2>
+          <p>If you have any question about the project please contact me at:</p>
+          <ul>
+            <li>
+              <a href="mailto:romeonupieri@gmail.com">email</a>: Please include in the subject [FLCLI]
+            </li>
+            <li>
+              <a href="https://t.me/Flowrome">telegram</a>
+            </li>
+          </ul>
+          <h2 id="follow-me">FOLLOW ME</h2>
+          <p>Discover latest updates through my Telegram channel:</p>
+          <ul>
+            <li>
+              <a href="https://t.me/flstencilcli">FLCLI</a>
+            </li>
+          </ul>
+        </section>
+      </main>
+    ];
+  }
+}

@@ -5,10 +5,11 @@ const { ENVS } = require('../consts');
 
 Config.updateEnv(ENVS.DEV);
 
-cli.welcome().then(() => {
-  cli.configurables(process.argv).then(array => {
-    array.forEach(function(val, index) {
-      cli.decide(val, index, array);
-    });
+(async () => {
+  cli.welcome();
+  const array = await cli.configurables(process.argv);
+  // console.log(array);
+  array.forEach(function(val, index) {
+    cli.decide(val, index, array);
   });
-});
+})();

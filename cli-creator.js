@@ -3,94 +3,78 @@ const Config = require('./config');
 const log = require('./log');
 const ProjectCreator = require('./project-creator');
 const ComponentsCreator = require('./components-creator');
-const prompt = require('prompt');
+const prompts = require('prompts');
 
 module.exports = {
   welcome() {
-    return Promise.resolve().then(() => {
-      log.cwelcome();
-    });
+    log.cwelcome();
   },
-  configurables(array) {
-    const promise = new Promise((resolve, reject) => {
-      const ynRegex = /^([Y|y]([E|e][S|s])?|[N|n]([O|o])?)+$/;
-      const scheme = [
-        array.length < 3
-          ? {
-              ask: () => array.length < 3,
-              name: 'type',
-              description: 'What do you want to create?\n - project\n - page\n - molecule\n',
-              default: 'project',
-              pattern: /(project|page|molecule)/gm
-            }
-          : null,
-        array.length < 4
-          ? {
-              ask: () => array.length < 4,
-              name: 'name',
-              description: 'How do you want to call it?',
-              default: 'app-name',
-              pattern: /[a-zA-Z_-]/gm
-            }
-          : null,
-        {
-          ask: () => (prompt.history('type') || {}).value === 'project' || array[2] === 'project',
-          name: 'molecule_prefix',
-          default: 'fl',
-          description: 'Which prefix do you choose for your molecules?',
-          pattern: /^[a-zA-Z]+$/gm
-        },
-        {
-          ask: () => (prompt.history('type') || {}).value === 'project' || array[2] === 'project',
-          name: 'include_spec',
-          default: 'Y',
-          message: 'You should answer Yes/No',
-          description: 'Include Unit tests?(Y/N)',
-          pattern: ynRegex
-        },
-        {
-          ask: () => (prompt.history('type') || {}).value === 'project' || array[2] === 'project',
-          name: 'include_etoe',
-          default: 'Y',
-          message: 'You should answer Yes/No',
-          description: 'Include E2E tests?(Y/N)',
-          pattern: ynRegex
-        },
-        {
-          ask: () => (prompt.history('type') || {}).value === 'project' || array[2] === 'project',
-          name: 'include_md_reader',
-          default: 'Y',
-          message: 'You should answer Yes/No',
-          description: 'Include MD READER feature?(Y/N)',
-          pattern: ynRegex
-        }
-      ].filter(field => !!field);
-      prompt.start();
-      prompt.get(scheme, (err, result) => {
-        if (err) {
-          reject(err);
-        }
-        resolve(result);
-      });
-    })
-      .then(result => {
-        const confirmRegex = /^([Y|y]([E|e][S|s])?)+$/;
-        if (result) {
-          result.include_etoe = confirmRegex.test(result.include_etoe);
-          result.include_spec = confirmRegex.test(result.include_spec);
-          result.include_md_reader = confirmRegex.test(result.include_md_reader);
-          array = [...array, ...(result.type ? [result.type] : []), ...(result.name ? [result.name] : [])];
-          if (result.type === 'project' || array[2] === 'project') {
-            Config.setConfigurable(result);
+  async configurables(array) {
+    const scheme = [
+      {
+        type: () => (array.length < 3 ? 'select' : null),
+        name: 'type',
+        message: 'What do you want to create?',
+        initial: 0,
+        choices: [
+          {
+            title: 'Project',
+            value: 'project'
+          },
+          {
+            title: 'Page',
+            value: 'page'
+          },
+          {
+            title: 'Molecule',
+            value: 'molecule'
           }
-          return array;
-        }
-      })
-      .catch(err => {
-        Common.exitWithError('While retrieving configuration', err);
-      });
+        ],
+        validate: type => /(project|page|molecule)/gm.test(type)
+      },
+      {
+        type: () => (array.length < 4 ? 'text' : null),
+        name: 'name',
+        message: 'How do you want to call it?',
+        initial: 'app-name',
+        validate: name => /[a-zA-Z_-]/gm.test(name)
+      },
+      {
+        type: (prev, values) => (values.type === 'project' || array[2] === 'project' ? 'text' : null),
+        name: 'molecule_prefix',
+        initial: 'fl',
+        message: 'Which prefix do you choose for your molecules?',
+        validate: mp => /^[a-zA-Z]+$/gm.test(mp)
+      },
+      {
+        type: (prev, values) => (values.type === 'project' || array[2] === 'project' ? 'confirm' : null),
+        name: 'include_spec',
+        initial: true,
+        message: 'Include Unit tests?'
+      },
+      {
+        type: (prev, values) => (values.type === 'project' || array[2] === 'project' ? 'confirm' : null),
+        name: 'include_etoe',
+        initial: true,
+        message: 'Include E2E tests?'
+      },
+      {
+        type: (prev, values) => (values.type === 'project' || array[2] === 'project' ? 'confirm' : null),
+        name: 'include_md_reader',
+        initial: true,
+        message: 'Include MD READER feature?'
+      }
+    ].filter(field => !!field);
+    const result = await prompts(scheme);
+    if (result) {
+      array = [...array, ...(result.type ? [result.type] : []), ...(result.name ? [result.name] : [])];
+      if (result.type === 'project' || array[2] === 'project') {
+        Config.setConfigurable(result);
+      }
+      return array;
+    }
 
-    return promise;
+    return result;
   },
   decide(val, index, array) {
     if (array.length < 3) {

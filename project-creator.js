@@ -5,6 +5,7 @@ const Spinner = require('cli-spinner').Spinner;
 const log = require('./log');
 const Common = require('./common');
 const Config = require('./config');
+const { ENVS } = require('./consts');
 
 module.exports = {
   createProject(appName) {
@@ -21,6 +22,7 @@ module.exports = {
       if (Config.getConfigurable().include_md_reader) {
         this.createMarkdownReader(appName);
       }
+      this.createWelcomePage(appName);
 
       log.cwarn('INSTALLING DEPENDENCIES');
 
@@ -30,9 +32,12 @@ module.exports = {
 
       shell.exec('npm i', null, () => {
         shell.exec('git init', null, () => {
-          spinner.stop();
-          shell.cd('../');
-          log.cwarn('FINISHED INSTALLING DEPENDENCIES AND GIT INITIALIZATION');
+          spinner.setSpinnerTitle('updating readmes... %s');
+          shell.exec('npm run readme', null, () => {
+            spinner.stop();
+            shell.cd('../');
+            log.cwarn('FINISHED INSTALLING DEPENDENCIES AND GIT INITIALIZATION');
+          })
         });
       });
     });
@@ -163,7 +168,7 @@ module.exports = {
     const appPath = `./`;
     if (Config.getConfigurable().include_etoe) {
       Common.readTmplAndWrite(
-        `${Config.installationPath()}/templates/app/app.e2e.ts.tmpl`,
+        `${Config.installationPath(Config.env === ENVS.DEV)}/templates/app/app.e2e.ts.tmpl`,
         `${appPath}/src/components/app/app.e2e.ts`,
         '',
         'typescript'
@@ -171,14 +176,14 @@ module.exports = {
     }
     if (Config.getConfigurable().include_spec) {
       Common.readTmplAndWrite(
-        `${Config.installationPath()}/templates/app/app.spec.ts.tmpl`,
+        `${Config.installationPath(Config.env === ENVS.DEV)}/templates/app/app.spec.ts.tmpl`,
         `${appPath}/src/components/app/app.spec.ts`,
         '',
         'typescript'
       );
     }
     Common.readTmplAndWrite(
-      `${Config.installationPath()}/templates/app/app.tsx${
+      `${Config.installationPath(Config.env === ENVS.DEV)}/templates/app/app.tsx${
         Config.getConfigurable().include_md_reader ? '' : '[NO_MD_READER]'
       }.tmpl`,
       `${appPath}/src/components/app/app.tsx`,
@@ -186,7 +191,7 @@ module.exports = {
       'typescript'
     );
     Common.readTmplAndWrite(
-      `${Config.installationPath()}/templates/app/app.scss.tmpl`,
+      `${Config.installationPath(Config.env === ENVS.DEV)}/templates/app/app.scss.tmpl`,
       `${appPath}/src/components/app/app.scss`,
       '',
       'scss'
@@ -198,7 +203,7 @@ module.exports = {
     Common.createFolderSync(`${appPath}/src/components/markdown-reader`);
     if (Config.getConfigurable().include_etoe) {
       Common.readTmplAndWrite(
-        `${Config.installationPath()}/templates/markdown-reader/markdown-reader.e2e.ts.tmpl`,
+        `${Config.installationPath(Config.env === ENVS.DEV)}/templates/markdown-reader/markdown-reader.e2e.ts.tmpl`,
         `${appPath}/src/components/markdown-reader/markdown-reader.e2e.ts`,
         '',
         'typescript'
@@ -206,24 +211,57 @@ module.exports = {
     }
     if (Config.getConfigurable().include_spec) {
       Common.readTmplAndWrite(
-        `${Config.installationPath()}/templates/markdown-reader/markdown-reader.spec.ts.tmpl`,
+        `${Config.installationPath(Config.env === ENVS.DEV)}/templates/markdown-reader/markdown-reader.spec.ts.tmpl`,
         `${appPath}/src/components/markdown-reader/markdown-reader.spec.ts`,
         '',
         'typescript'
       );
     }
     Common.readTmplAndWrite(
-      `${Config.installationPath()}/templates/markdown-reader/markdown-reader.tsx.tmpl`,
+      `${Config.installationPath(Config.env === ENVS.DEV)}/templates/markdown-reader/markdown-reader.tsx.tmpl`,
       `${appPath}/src/components/markdown-reader/markdown-reader.tsx`,
       '',
       'typescript'
     );
     Common.readTmplAndWrite(
-      `${Config.installationPath()}/templates/markdown-reader/markdown-reader.scss.tmpl`,
+      `${Config.installationPath(Config.env === ENVS.DEV)}/templates/markdown-reader/markdown-reader.scss.tmpl`,
       `${appPath}/src/components/markdown-reader/markdown-reader.scss`,
       '',
       'scss'
     );
     Common.successMessage('register markdown-page');
+  },
+  createWelcomePage() {
+    const appPath = `./`;
+    Common.createFolderSync(`${appPath}/src/components/page/welcome.page`);
+    if (Config.getConfigurable().include_etoe) {
+      Common.readTmplAndWrite(
+        `${Config.installationPath(Config.env === ENVS.DEV)}/templates/welcome.page/welcome.page.e2e.ts.tmpl`,
+        `${appPath}/src/components/page/welcome.page/welcome.page.e2e.ts`,
+        '',
+        'typescript'
+      );
+    }
+    if (Config.getConfigurable().include_spec) {
+      Common.readTmplAndWrite(
+        `${Config.installationPath(Config.env === ENVS.DEV)}/templates/welcome.page/welcome.page.spec.ts.tmpl`,
+        `${appPath}/src/components/page/welcome.page/welcome.page.spec.ts`,
+        '',
+        'typescript'
+      );
+    }
+    Common.readTmplAndWrite(
+      `${Config.installationPath(Config.env === ENVS.DEV)}/templates/welcome.page/welcome.page.tsx.tmpl`,
+      `${appPath}/src/components/page/welcome.page/welcome.page.tsx`,
+      '',
+      'typescript'
+    );
+    Common.readTmplAndWrite(
+      `${Config.installationPath(Config.env === ENVS.DEV)}/templates/welcome.page/welcome.page.scss.tmpl`,
+      `${appPath}/src/components/page/welcome.page/welcome.page.scss`,
+      '',
+      'scss'
+    );
+    Common.successMessage('register welcome-page');
   }
 };

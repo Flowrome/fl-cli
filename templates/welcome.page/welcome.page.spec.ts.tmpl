@@ -1,0 +1,29 @@
+import { newSpecPage } from '@stencil/core/testing';
+import { WelcomePage } from './welcome.page';
+
+it('should render welcome-page', async () => {
+  const page = await newSpecPage({
+    components: [WelcomePage],
+    html: `<welcome-page></welcome-page>`,
+  });
+  expect(page.root).toEqualHtml(`
+    <welcome-page>
+      <mock:shadow-root>
+        <header class="default-header">
+            <div class="container-fluid default-header__content">
+                <h1>
+                    welcome.page HEADER
+                </h1>
+            </div>
+        </header>
+        <main class="main-container">
+          <section class="container-fluid page">
+            <h2>
+              welcome.page SECTION
+            </h2>
+          </section>
+        </main>
+      </mock:shadow-root>
+    </welcome-page>
+  `);
+});

@@ -5,15 +5,19 @@ import { Environment } from '@env';
 @Component({
   tag: 'fl-app',
   styleUrl: 'app.scss',
-  shadow: true,
+  shadow: true
 })
 export class AppPage {
   public render(): any {
     return (
       <stencil-router>
         <stencil-route-switch scrollTopOffset={0}>
-          <stencil-route url="/" component="page-name" exact={true}></stencil-route>
-					{!Environment.prod && <stencil-route url="/md-reader" component="markdown-reader" />}
+          <stencil-route
+            url="/"
+            component="welcome-page" // YOU CAN REMOVE THIS ROUTE
+            exact={true}
+          ></stencil-route>
+          {!Environment.prod && <stencil-route url="/md-reader" component="markdown-reader" />}
         </stencil-route-switch>
       </stencil-router>
     );
