@@ -7,8 +7,7 @@
 
 ## INSTALLATION
 ```
-git clone https://Flowrome@bitbucket.org/Flowrome/fl-stencil-cli.git
-npm i -g /path/to/fl-stencil-cli/
+npm i -g https://Flowrome@bitbucket.org/Flowrome/fl-stencil-cli.git
 ```
 
 ## USAGE
@@ -27,10 +26,12 @@ npm i -g /path/to/fl-stencil-cli/
 
 ## SCAFFOLD STRUCTURE
 ```bash
-|-- project-name
+|-- app-name
     |-- .editorconfig
     |-- .gitignore
+    |-- .prettierrc
     |-- LICENSE
+    |-- directoryList.md
     |-- fl-stencil-config.json
     |-- fl-stencil-env-chooser.js
     |-- fl-stencil-md-reader.js
@@ -39,44 +40,90 @@ npm i -g /path/to/fl-stencil-cli/
     |-- readme.md
     |-- stencil.config.ts
     |-- tsconfig.json
+    |-- tslint.json
+    |-- .stencil
+        |-- ... // STENCIL CACHE
+    |-- dist
+        |-- ... // FOLDER THAT CONTAINS THE BUILDED WEB COMPONENTS
+    |-- node_modules
+        |-- ...
+    |-- loader
+        |-- cdn.js
+        |-- index.cjs.js
+        |-- index.d.ts
+        |-- index.es2017.mjs
+        |-- index.mjs
+        |-- node-main.js
+        |-- package.json
     |-- src
         |-- components.d.ts
         |-- index.html
         |-- index.ts
         |-- assets
-        |   |-- fonts
-        |   |   |-- raleway_thin-webfont.eot
-        |   |   |-- raleway_thin-webfont.ttf
-        |   |   |-- raleway_thin-webfont.woff
-        |   |-- images
-        |   |-- mocks
-        |       |-- readmes.json
+            |-- fonts
+                |-- raleway_thin-webfont.eot
+                |-- raleway_thin-webfont.ttf
+                |-- raleway_thin-webfont.woff
+                |-- ...
+            |-- images
+                |-- logo-bw-little.png
+                |-- ...
+            |-- mocks
+                |-- readmes.json
+                |-- ...
         |-- components
-        |   |-- app
-        |   |   |-- app.e2e.ts
-        |   |   |-- app.scss
-        |   |   |-- app.spec.ts
-        |   |   |-- app.tsx
-        |   |-- markdown-reader
-        |       |-- markdown-reader.e2e.ts
-        |       |-- markdown-reader.scss
-        |       |-- markdown-reader.spec.ts
-        |       |-- markdown-reader.tsx
+            |-- app
+                |-- app.e2e.ts
+                |-- app.scss
+                |-- app.spec.ts
+                |-- app.tsx
+                |-- readme.md
+            |-- markdown-reader
+                |-- markdown-reader.e2e.ts
+                |-- markdown-reader.scss
+                |-- markdown-reader.spec.ts
+                |-- markdown-reader.tsx
+                |-- readme.md
+            |-- molecules
+                |-- fl-test.molecule
+                    |-- fl-test.molecule.e2e.ts
+                    |-- fl-test.molecule.scss
+                    |-- fl-test.molecule.spec.ts
+                    |-- fl-test.molecule.tsx
+                |-- ...
+            |-- page
+                |-- test.page
+                    |-- test.page.e2e.ts
+                    |-- test.page.scss
+                    |-- test.page.spec.ts
+                    |-- test.page.tsx
+                |-- welcome.page
+                    |-- readme.md
+                    |-- welcome.page.e2e.ts
+                    |-- welcome.page.scss
+                    |-- welcome.page.spec.ts
+                    |-- welcome.page.tsx
+                |-- ...
         |-- envs
-        |   |-- env.dev.ts
-        |   |-- env.prod.ts
+            |-- env.dev.ts
+            |-- env.prod.ts
+            |-- env.ts
         |-- styles
-        |   |-- _common.scss
-        |   |-- _fonts.scss
-        |   |-- _functions.scss
-        |   |-- _layout.scss
-        |   |-- _local-styles.scss
-        |   |-- _mixins.scss
-        |   |-- _reset.scss
-        |   |-- _styles.scss
-        |   |-- _themes.scss
-        |   |-- _variables.scss
+            |-- _common.scss
+            |-- _fonts-face.scss
+            |-- _functions.scss
+            |-- _layout.scss
+            |-- _local-styles.scss
+            |-- _mixins.scss
+            |-- _reset.scss
+            |-- _styles.scss
+            |-- _themes.scss
+            |-- _variables.scss
         |-- utils
+            |-- ...
+    |-- www
+        |-- ... // FOLDER THAT CONTAINS THE WEBSITE
+ 
 ```
 
 ## COMPONENTS
