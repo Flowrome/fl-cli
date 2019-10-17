@@ -37,7 +37,7 @@ module.exports = {
             spinner.stop();
             shell.cd('../');
             log.cwarn('FINISHED INSTALLING DEPENDENCIES AND GIT INITIALIZATION');
-          })
+          });
         });
       });
     });
@@ -76,6 +76,15 @@ module.exports = {
       '',
       'babel'
     );
+
+    Common.readTmplAndWrite(
+      `${Config.installationPath()}/to-copy/fl-dynamic-builds.js.tmpl`,
+      `${appPath}/fl-dynamic-builds.js`,
+      '',
+      'babel'
+    );
+
+    this.copyTemplatesSecondaryBuildsFiles(appName);
 
     const promise = Promise.all([
       new Promise((resolve, reject) =>
@@ -263,5 +272,36 @@ module.exports = {
       'scss'
     );
     Common.successMessage('register welcome-page');
+  },
+  copyTemplatesSecondaryBuildsFiles(appName) {
+    const appPath = `./${appName}`;
+
+    Common.readTmplAndWrite(
+      `${Config.installationPath()}/to-copy/templates/components-build/package.json.tmpl`,
+      `${appPath}/templates/components-build/package.json.tmpl`,
+      _.kebabCase(appName),
+      'json'
+    );
+
+    Common.readTmplAndWrite(
+      `${Config.installationPath()}/to-copy/templates/components-build/stencil.config.tmpl`,
+      `${appPath}/templates/components-build/stencil.config.ts.tmpl`,
+      _.kebabCase(appName),
+      'typescript'
+    );
+
+    Common.readTmplAndWrite(
+      `${Config.installationPath()}/to-copy/templates/components-build/fl-stencil-config.json.tmpl`,
+      `${appPath}/templates/components-build/mh-stencil-config.json.ts.tmpl`,
+      _.kebabCase(appName),
+      'json'
+    );
+
+    Common.readTmplAndWrite(
+      `${Config.installationPath()}/to-copy/templates/components-build/src/index.html.tmpl`,
+      `${appPath}/templates/components-build/src/index.html.tmpl`,
+      _.kebabCase(appName),
+      'html'
+    );
   }
 };

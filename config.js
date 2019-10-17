@@ -39,7 +39,6 @@ module.exports = {
     }
   },
   installationPath(goBack = false) {
-    console.log(process.cwd());
     switch (this.env) {
       case ENVS.DEV:
         return (goBack) ? '..' : '.';

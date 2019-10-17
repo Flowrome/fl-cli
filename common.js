@@ -69,6 +69,12 @@ module.exports = {
       appContent = appContent.replace(whatToLookFor, whatToOverwrite);
     }
 
+    const folderPath = appPath.split('/');
+    folderPath.pop()
+    if (!fs.existsSync(folderPath)) {
+      this.createFolderSync(`${folderPath.join('/')}`)
+    }
+
     fs.writeFileSync(appPath, prettyType ? prettier.format(appContent, prettyOpts(prettyType)) : appContent);
 
     this.successMessage(`write from template ${toRead} to ${appPath}`);

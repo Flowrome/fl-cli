@@ -1,5 +1,5 @@
 {
-  "name": "[TMPL_NAME]",
+  "name": "[TMPL_NAME]-components-build",
   "version": "1.0.0",
   "description": "FLCLI Stencil project starter",
   "main": "dist/index.js",
@@ -9,7 +9,7 @@
   "types": "dist/types/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/[TMPL_NAME]/[TMPL_NAME].js",
+  "unpkg": "dist/[TMPL_NAME]-components-build/[TMPL_NAME]-components-build.js",
   "files": [
     "dist/",
     "loader/"
@@ -24,9 +24,6 @@
     "start": "node ./fl-stencil-env-chooser.js",
     "start-dev": "node ./fl-stencil-env-chooser.js env=dev",
     "start-prod": "node ./fl-stencil-env-chooser.js env=prod",
-    "readme-backup": "node ./fl-stencil-md-reader.js --keep-saved",
-    "readme": "npm run readme-backup && npm run build && npm run readme-compiler",
-    "readme-compiler": "node ./fl-stencil-md-reader.js",
     "build": "npm run start compile",
     "build-dev": "npm run start-dev compile",
     "build-prod": "npm run start-prod compile",
@@ -66,6 +63,7 @@
   },
   "devDependencies": {
     "@stencil/core": "^1.0.7",
+    "pre-commit": "^1.2.2",
     "prettier": "1.18.2",
     "tslint": "^5.10.0",
     "tslint-react": "^3.6.0",
@@ -85,8 +83,6 @@
     "shelljs": "^0.8.3",
     "fs-extra": "^8.1.0",
     "glob-promise": "^3.4.0",
-    "rollup-plugin-alias": "^1.5.2",
-    "marked": "^0.6.3",
-    "mermaid": "^8.1.0"
+    "rollup-plugin-alias": "^1.5.2"
   }
 }

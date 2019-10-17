@@ -1,6 +1,6 @@
 {
   "name": "fl-stencil-cli",
-  "version": "1.0.1-00",
+  "version": "1.0.1-01",
   "description": "",
   "main": "./indexes/index.prod.js",
   "scripts": {
@@ -37,6 +37,7 @@
     "ncp": "^2.0.0",
     "prettier": "^1.18.2",
     "prompts": "^2.2.1",
+    "rimraf": "^3.0.0",
     "shelljs": "^0.8.3"
   }
 }

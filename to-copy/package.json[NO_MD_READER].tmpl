@@ -27,6 +27,7 @@
     "build": "npm run start compile",
     "build-dev": "npm run start-dev compile",
     "build-prod": "npm run start-prod compile",
+    "build-prod-dupes": "npm run pr-copy",
 
     "spec-test": "stencil test --spec",
     "e2e-test": "stencil test --e2e",
@@ -41,7 +42,8 @@
     "tslint": "npx tslint -c ./tslint.json --project ./tsconfig.json",
     "tslint:fix": "npx tslint --fix -c ./tslint.json --project ./tsconfig.json",
     "prettier:tslint": "npm run prettier && npm run tslint:fix",
-    "check:staged": "lint-staged"
+    "check:staged": "lint-staged",
+    "pr-copy": "node ./fl-dynamic-builds.js"
   },
   "husky": {
     "hooks": {
@@ -75,7 +77,11 @@
     "@stencil/postcss": "^1.0.1",
     "@types/autoprefixer": "^9.5.0",
     "autoprefixer": "^9.6.1",
+    "chokidar": "^3.2.2",
     "glob": "^7.1.4",
+    "ora": "^4.0.2",
+    "shelljs": "^0.8.3",
+    "fs-extra": "^8.1.0",
     "glob-promise": "^3.4.0",
     "rollup-plugin-alias": "^1.5.2"
   }

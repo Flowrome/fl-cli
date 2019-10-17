@@ -125,6 +125,9 @@ npm run start/build env=[ENV_NAME]
 ## DISTRIBUTION (aka dist)
 Inside **```dist```** folder you have your minified components for your ui-library (ready to publish on npm), build with ```npm run build/build-[ENV]```.
 
+## PARALLEL BUILDS (aka builds/[BUILD-NAME])
+Inside **```builds/[BUILD-NAME]```** folder you will find the parallel builds you defined inside the ```fl-stencil-config.json``` to have the builds (ready to be published inside npm) you should run ```npm run build-prod-dupes```, you can configure the builds you want inside the configuration JSON, these builds let you create differents package of your application removing components/folder or modifying files in your current project. Use the templates folder to re/write a file for your different builds.
+
 ## PUBLISHING (aka www)
 Inside **```www```** folder you have your minified website ready for production, build with ```npm run build/build-[ENV]```.
 
