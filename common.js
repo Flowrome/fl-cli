@@ -70,9 +70,9 @@ module.exports = {
     }
 
     const folderPath = appPath.split('/');
-    folderPath.pop()
+    folderPath.pop();
     if (!fs.existsSync(folderPath)) {
-      this.createFolderSync(`${folderPath.join('/')}`)
+      this.createFolderSync(`${folderPath.join('/')}`);
     }
 
     fs.writeFileSync(appPath, prettyType ? prettier.format(appContent, prettyOpts(prettyType)) : appContent);

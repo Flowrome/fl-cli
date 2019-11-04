@@ -41,7 +41,7 @@ module.exports = {
   installationPath(goBack = false) {
     switch (this.env) {
       case ENVS.DEV:
-        return (goBack) ? '..' : '.';
+        return goBack ? '..' : '.';
       case ENVS.PROD:
         return getInstalledPathSync(this.appName);
     }
