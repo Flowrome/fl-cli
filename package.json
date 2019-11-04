@@ -1,6 +1,6 @@
 {
   "name": "fl-stencil-cli",
-  "version": "1.0.1-05",
+  "version": "1.0.1-06",
   "description": "",
   "main": "./indexes/index.prod.js",
   "scripts": {
@@ -14,6 +14,19 @@
     "check-version": "node check-version.js",
     "precommit": "npm run check-version && npm run make-me-pretty"
   },
+  "keywords": [
+    "web components",
+    "stencil",
+    "web app",
+    "custom elements",
+    "components",
+    "typescript",
+    "es6",
+    "node",
+    "cli",
+    "pwa",
+    "progressive web app"
+  ],
   "repository": {
     "url": "https://github.com/Flowrome/fl-cli.git",
     "type": "git"
