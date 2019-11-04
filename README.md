@@ -7,7 +7,7 @@
 
 ## INSTALLATION
 ```
-npm i -g fl-cli
+npm i fl-stencil-cli -g
 ```
 
 ## USAGE
