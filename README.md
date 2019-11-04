@@ -7,7 +7,7 @@
 
 ## INSTALLATION
 ```
-npm i -g https://Flowrome@bitbucket.org/Flowrome/fl-stencil-cli.git
+npm i -g fl-cli
 ```
 
 ## USAGE
