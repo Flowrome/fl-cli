@@ -284,7 +284,7 @@ module.exports = {
     );
 
     Common.readTmplAndWrite(
-      `${Config.installationPath()}/to-copy/templates/components-build/stencil.config.tmpl`,
+      `${Config.installationPath()}/to-copy/templates/components-build/stencil.config.ts.tmpl`,
       `${appPath}/templates/components-build/stencil.config.ts.tmpl`,
       _.kebabCase(appName),
       'typescript'
@@ -292,7 +292,7 @@ module.exports = {
 
     Common.readTmplAndWrite(
       `${Config.installationPath()}/to-copy/templates/components-build/fl-stencil-config.json.tmpl`,
-      `${appPath}/templates/components-build/mh-stencil-config.json.ts.tmpl`,
+      `${appPath}/templates/components-build/mh-stencil-config.json.tmpl`,
       _.kebabCase(appName),
       'json'
     );
