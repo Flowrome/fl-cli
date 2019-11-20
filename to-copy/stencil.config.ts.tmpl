@@ -6,26 +6,33 @@ import alias from 'rollup-plugin-alias';
 import outputTargets from './stencil.config.output-targets.json';
 import { OutputTarget } from '@stencil/core/dist/declarations';
 
-const outputTargetsParsed: OutputTarget[] = (<any>outputTargets).map(target => {
-  if (!!target.copy) {
-    target.copy = target.copy.map(copyElem => {
-      copyElem.src =
-        copyElem.src.indexOf('#PATH#') > -1
-          ? require('path').resolve(copyElem.src.replace('#PATH#', ''))
-          : copyElem.src;
-      copyElem.dest =
-        copyElem.dest.indexOf('#PATH#') > -1
-          ? require('path').resolve(copyElem.dest.replace('#PATH#', ''))
-          : copyElem.dest;
-      return copyElem;
-    });
+const outputTargetsParsed = [
+  {
+    type: 'dist',
+    esmLoaderPath: '../loader',
+    copy: [
+      {
+        src: require('path').resolve('./src/assets/fonts'),
+        dest: require('path').resolve('./dist/assets/fonts')
+      },
+      {
+        src: require('path').resolve('./src/assets/images'),
+        dest: require('path').resolve('./dist/assets/images')
+      }
+    ]
+  },
+  {
+    type: 'docs-readme'
+  },
+  {
+    type: 'www',
+    serviceWorker: null // disable service workers
   }
-  return target;
-});
+].filter((target: any) => outputTargets.indexOf(target.type) > -1 && target);
 
 export const config: Config = {
   namespace: 'app-name',
-  outputTargets: [...outputTargetsParsed],
+  outputTargets: outputTargetsParsed as any,
   globalStyle: 'src/styles/_styles.scss', // THIS ONE WILL BE EXPORTED IN app-name.css
   plugins: [
     sass({

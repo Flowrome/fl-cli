@@ -255,7 +255,7 @@ function rebuildOutputTargets() {
     'UTF-8',
   );
   const renamedOutputTargets = JSON.parse(outputTargets).filter(
-    target => target.type === 'dist',
+    target => target === 'dist',
   );
   return {
     file: JSON.stringify(renamedOutputTargets),
