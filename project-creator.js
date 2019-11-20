@@ -84,8 +84,6 @@ module.exports = {
       'babel'
     );
 
-    this.copyTemplatesSecondaryBuildsFiles(appName);
-
     const promise = Promise.all([
       new Promise((resolve, reject) =>
         ncp(`${Config.installationPath()}/to-copy/src/styles`, `${appPath}/src/styles`, err =>
@@ -135,6 +133,10 @@ module.exports = {
           `${appPath}/stencil.config.ts`,
           _.kebabCase(appName),
           'typescript'
+        );
+        Common.readTmplAndWrite(
+          `${Config.installationPath()}/to-copy/stencil.config.output-targets.json.tmpl`,
+          `${appPath}/stencil.config.output-targets.json`
         );
         Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/LICENSE.tmpl`, `${appPath}/LICENSE`, '');
         Common.readTmplAndWrite(
@@ -272,36 +274,5 @@ module.exports = {
       'scss'
     );
     Common.successMessage('register welcome-page');
-  },
-  copyTemplatesSecondaryBuildsFiles(appName) {
-    const appPath = `./${appName}`;
-
-    Common.readTmplAndWrite(
-      `${Config.installationPath()}/to-copy/templates/components-build/package.json.tmpl`,
-      `${appPath}/templates/components-build/package.json.tmpl`,
-      _.kebabCase(appName),
-      'json'
-    );
-
-    Common.readTmplAndWrite(
-      `${Config.installationPath()}/to-copy/templates/components-build/stencil.config.ts.tmpl`,
-      `${appPath}/templates/components-build/stencil.config.ts.tmpl`,
-      _.kebabCase(appName),
-      'typescript'
-    );
-
-    Common.readTmplAndWrite(
-      `${Config.installationPath()}/to-copy/templates/components-build/fl-stencil-config.json.tmpl`,
-      `${appPath}/templates/components-build/mh-stencil-config.json.tmpl`,
-      _.kebabCase(appName),
-      'json'
-    );
-
-    Common.readTmplAndWrite(
-      `${Config.installationPath()}/to-copy/templates/components-build/src/index.html.tmpl`,
-      `${appPath}/templates/components-build/src/index.html.tmpl`,
-      _.kebabCase(appName),
-      'html'
-    );
   }
 };

@@ -3,37 +3,34 @@ import { sass } from '@stencil/sass';
 import { postcss } from '@stencil/postcss';
 import autoprefixer from 'autoprefixer';
 import alias from 'rollup-plugin-alias';
+import outputTargets from './stencil.config.output-targets.json';
+import { OutputTarget } from '@stencil/core/dist/declarations';
+
+const outputTargetsParsed: OutputTarget[] = (<any>outputTargets).map(target => {
+  if (!!target.copy) {
+    target.copy = target.copy.map(copyElem => {
+      copyElem.src =
+        copyElem.src.indexOf('#PATH#') > -1
+          ? require('path').resolve(copyElem.src.replace('#PATH#', ''))
+          : copyElem.src;
+      copyElem.dest =
+        copyElem.dest.indexOf('#PATH#') > -1
+          ? require('path').resolve(copyElem.dest.replace('#PATH#', ''))
+          : copyElem.dest;
+      return copyElem;
+    });
+  }
+  return target;
+});
 
 export const config: Config = {
-  namespace: '[TMPL_NAME]',
-  outputTargets: [
-    {
-      type: 'dist',
-      esmLoaderPath: '../loader',
-      copy: [
-        {
-          src: require('path').resolve('./src/assets/fonts'),
-          dest: require('path').resolve('./dist/assets/fonts')
-        },
-        {
-          src: require('path').resolve('./src/assets/images'),
-          dest: require('path').resolve('./dist/assets/images')
-        }
-      ],
-    },
-    {
-      type: 'docs-readme'
-    },
-    {
-      type: 'www',
-      serviceWorker: null // disable service workers
-    }
-  ],
-  globalStyle: 'src/styles/_styles.scss', // THIS ONE WILL BE EXPORTED IN [TMPL_NAME].css
+  namespace: 'app-name',
+  outputTargets: [...outputTargetsParsed],
+  globalStyle: 'src/styles/_styles.scss', // THIS ONE WILL BE EXPORTED IN app-name.css
   plugins: [
     sass({
       injectGlobalPaths: [
-        'src/styles/_local-styles.scss', // THIS ONE WILL BE INJECTED INSIDE THE COMPONENTS
+        'src/styles/_local-styles.scss' // THIS ONE WILL BE INJECTED INSIDE THE COMPONENTS
       ]
     }),
     postcss({
@@ -44,5 +41,5 @@ export const config: Config = {
       // ROLLUP ALIAS SUPPORT ONLY THE ALIASES FOR FILES (NOT FOR FOLDERS)
       '@env': 'src/envs/env.ts'
     })
-  ],
+  ]
 };
