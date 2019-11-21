@@ -31,9 +31,9 @@ const outputTargetsParsed = [
 ].filter((target: any) => outputTargets.indexOf(target.type) > -1 && target);
 
 export const config: Config = {
-  namespace: 'app-name',
+  namespace: '[TMPL_NAME]',
   outputTargets: outputTargetsParsed as any,
-  globalStyle: 'src/styles/_styles.scss', // THIS ONE WILL BE EXPORTED IN app-name.css
+  globalStyle: 'src/styles/_styles.scss', // THIS ONE WILL BE EXPORTED IN [TMPL_NAME].css
   plugins: [
     sass({
       injectGlobalPaths: [
