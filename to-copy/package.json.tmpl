@@ -21,9 +21,9 @@
     "create-molecule": "flcli molecule",
     "create-page": "flcli page",
   
-    "start": "node ./fl-stencil-env-chooser.js",
-    "start-dev": "node ./fl-stencil-env-chooser.js env=dev",
-    "start-prod": "node ./fl-stencil-env-chooser.js env=prod",
+    "start": "npm run bundler && node ./fl-stencil-env-chooser.js",
+    "start-dev": "npm run bundler && node ./fl-stencil-env-chooser.js env=dev",
+    "start-prod": "npm run bundler && node ./fl-stencil-env-chooser.js env=prod",
     "readme-backup": "node ./fl-stencil-md-reader.js --keep-saved",
     "readme": "npm run readme-backup && npm run build && npm run readme-compiler",
     "readme-compiler": "node ./fl-stencil-md-reader.js",
@@ -36,7 +36,7 @@
     "e2e-test": "stencil test --e2e",
 
     "compile-start": "stencil build --dev --watch --serve",
-    "compile": "stencil build --docs",
+    "compile": "npm run bundler && stencil build --docs",
 
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
@@ -46,7 +46,9 @@
     "tslint:fix": "npx tslint --fix -c ./tslint.json --project ./tsconfig.json",
     "prettier:tslint": "npm run prettier && npm run tslint:fix",
     "check:staged": "lint-staged",
-    "pr-copy": "node ./fl-dynamic-builds.js"
+    "pr-copy": "node ./fl-dynamic-builds.js",
+
+    "bundler": "node ./bundler.js"
   },
   "husky": {
     "hooks": {

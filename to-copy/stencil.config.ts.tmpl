@@ -3,6 +3,7 @@ import { sass } from '@stencil/sass';
 import { postcss } from '@stencil/postcss';
 import autoprefixer from 'autoprefixer';
 import alias from 'rollup-plugin-alias';
+import { bundles } from './bundles';
 import outputTargets from './stencil.config.output-targets.json';
 import { OutputTarget } from '@stencil/core/dist/declarations';
 
@@ -33,6 +34,7 @@ const outputTargetsParsed = [
 export const config: Config = {
   namespace: '[TMPL_NAME]',
   outputTargets: outputTargetsParsed as any,
+  ...{ ...(bundles && bundles.length > 0 ? { bundles: [...bundles] } : {}) },
   globalStyle: 'src/styles/_styles.scss', // THIS ONE WILL BE EXPORTED IN [TMPL_NAME].css
   plugins: [
     sass({

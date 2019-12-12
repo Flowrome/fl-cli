@@ -1,0 +1,29 @@
+const glob = require('glob');
+const fs = require('fs');
+
+const pathDivider = process.platform === 'win32' ? '\\' : '/';
+const basePath = `.${pathDivider}`;
+const moleculePath = `${basePath}src${pathDivider}components${pathDivider}molecules${pathDivider}**${pathDivider}*.tsx`;
+
+glob(moleculePath, (err, matches) => {
+  if (err) return;
+  const tagNames = [];
+  matches.forEach(match => {
+    const file = fs.existsSync(match) ? fs.readFileSync(match, 'UTF-8') : '';
+    const tagRegex = /tag:( )?.*,$/gm;
+    const tag = file.match(tagRegex)[0];
+    const tagName = tag
+      .replace(/'/g, '')
+      .replace(/ /g, '')
+      .replace(/,/g, '')
+      .replace(/tag/g, '')
+      .replace(/:/g, '');
+    tagNames.push(tagName);
+  });
+  let str = 'export const bundles = [';
+  tagNames.forEach(elem => {
+    str = str + '\n\t' + `{ components: ['${elem}'] },`;
+  });
+  str = str + '\n];';
+  fs.writeFileSync('./bundles.ts', str);
+});
