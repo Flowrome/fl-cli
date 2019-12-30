@@ -1,5 +1,5 @@
 import { Component, Prop, h } from '@stencil/core';
-import { RouterHistory } from '@stencil/router';
+import { environment } from '@env';
 
 @Component({
   tag: '[TMPL_NAME]-molecule',
@@ -7,8 +7,7 @@ import { RouterHistory } from '@stencil/router';
   shadow: true,
 })
 export class [TMPL_NAME:CLASS_CASE]Molecule {
-  @Prop() history: RouterHistory;
-  @Prop() text: string = '[TMPL_NAME]-molecule';
+  @Prop() public text: string = '[TMPL_NAME]-molecule';
 
   render(): any {
     return <p>You are in {this.text}</p>;

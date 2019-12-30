@@ -43,7 +43,8 @@
     "tslint:fix": "npx tslint --fix -c ./tslint.json --project ./tsconfig.json",
     "prettier:tslint": "npm run prettier && npm run tslint:fix",
     "check:staged": "lint-staged",
-    "pr-copy": "node ./fl-dynamic-builds.js"
+    "pr-copy": "node ./fl-dynamic-builds.js",
+    "tslinter": "tslint --fix -c ./tslint.json 'src/**/*{.ts,.tsx}'"
   },
   "husky": {
     "hooks": {
@@ -82,7 +83,6 @@
     "ora": "^4.0.2",
     "shelljs": "^0.8.3",
     "fs-extra": "^8.1.0",
-    "glob-promise": "^3.4.0",
-    "rollup-plugin-alias": "^1.5.2"
+    "glob-promise": "^3.4.0"
   }
 }

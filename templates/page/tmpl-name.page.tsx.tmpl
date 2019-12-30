@@ -1,20 +1,21 @@
 import { Component, Prop, h } from '@stencil/core';
+import { environment } from '@env';
 
 @Component({
   tag: '[TMPL_NAME]-page',
   styleUrl: '[TMPL_NAME].page.scss',
-  shadow: true,
+  shadow: false,
 })
 export class [TMPL_NAME:CLASS_CASE]Page {
   @Prop() public headerTitle: string = <h1>[TMPL_NAME].page HEADER</h1>;
   @Prop() public sectionTitle: string = <h2>[TMPL_NAME].page SECTION</h2>;
   public render(): any {
 		return [
-			<header class="default-header">
-				<div class="default-header__content container-fluid">{this.headerTitle}</div>
+			<header class='default-header'>
+				<div class='default-header__content container-fluid'>{this.headerTitle}</div>
 			</header>,
-			<main class="main-container">
-				<section class="page container-fluid">{this.sectionTitle}</section>
+			<main class='main-container'>
+				<section class='page container-fluid'>{this.sectionTitle}</section>
 			</main>
 		];
   }

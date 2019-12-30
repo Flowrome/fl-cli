@@ -1,8 +1,10 @@
 //NODE_MODULES
 //END NODE_MODULES
 
-// GLOBAL STYLES
-@import 'fonts-face';
-// END GLOBAL STYLES
+@import "local-styles";
 
-@import 'local-styles';
+// GLOBAL STYLES
+@import "fonts-face";
+@import "common";
+@import "layout";
+// END GLOBAL STYLES

@@ -48,7 +48,8 @@
     "check:staged": "lint-staged",
     "pr-copy": "node ./fl-dynamic-builds.js",
 
-    "bundler": "node ./bundler.js"
+    "bundler": "node ./bundler.js",
+    "tslinter": "tslint --fix -c ./tslint.json 'src/**/*{.ts,.tsx}'"
   },
   "husky": {
     "hooks": {
@@ -87,7 +88,6 @@
     "shelljs": "^0.8.3",
     "fs-extra": "^8.1.0",
     "glob-promise": "^3.4.0",
-    "rollup-plugin-alias": "^1.5.2",
     "marked": "^0.6.3",
     "mermaid": "^8.1.0"
   }

@@ -2,12 +2,11 @@ import { Config } from '@stencil/core';
 import { sass } from '@stencil/sass';
 import { postcss } from '@stencil/postcss';
 import autoprefixer from 'autoprefixer';
-import alias from 'rollup-plugin-alias';
 import { bundles } from './bundles';
 import outputTargets from './stencil.config.output-targets.json';
 import { OutputTarget } from '@stencil/core/dist/declarations';
 
-const outputTargetsParsed = [
+const outputTargetsParsed: any[] = [
   {
     type: 'dist',
     esmLoaderPath: '../loader',
@@ -44,11 +43,6 @@ export const config: Config = {
     }),
     postcss({
       plugins: [autoprefixer()]
-    }),
-    alias({
-      resolve: ['.jsx', '.js', '.tsx', '.ts'],
-      // ROLLUP ALIAS SUPPORT ONLY THE ALIASES FOR FILES (NOT FOR FOLDERS)
-      '@env': 'src/envs/env.ts'
     })
   ]
 };
