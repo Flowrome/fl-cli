@@ -1,3 +1,3 @@
 export interface EnvironmentConfig {
-    prod: boolean;
+  prod: boolean;
 }

@@ -18,12 +18,13 @@
     "type": "git"
   },
   "scripts": {
+    "import-vars": "node ./fl-css-component-importer.js",
     "create-molecule": "flcli molecule",
     "create-page": "flcli page",
   
-    "start": "npm run bundler && node ./fl-stencil-env-chooser.js",
-    "start-dev": "npm run bundler && node ./fl-stencil-env-chooser.js env=dev",
-    "start-prod": "npm run bundler && node ./fl-stencil-env-chooser.js env=prod",
+    "start": "npm run import-vars && npm run bundler && node ./fl-stencil-env-chooser.js",
+    "start-dev": "npm run import-vars && npm run bundler && node ./fl-stencil-env-chooser.js env=dev",
+    "start-prod": "npm run import-vars && npm run bundler && node ./fl-stencil-env-chooser.js env=prod",
     "readme-backup": "node ./fl-stencil-md-reader.js --keep-saved",
     "readme": "npm run readme-backup && npm run build && npm run readme-compiler",
     "readme-compiler": "node ./fl-stencil-md-reader.js",
@@ -35,8 +36,8 @@
     "spec-test": "stencil test --spec",
     "e2e-test": "stencil test --e2e",
 
-    "compile-start": "stencil build --dev --watch --serve",
-    "compile": "npm run bundler && stencil build --docs",
+    "compile-start": "npm run import-vars && stencil build --dev --watch --serve",
+    "compile": "npm run import-vars && npm run bundler && stencil build --docs",
 
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",

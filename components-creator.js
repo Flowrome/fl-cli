@@ -43,6 +43,12 @@ module.exports = {
         moleculeName,
         'scss'
       );
+      Common.readTmplAndWrite(
+        `${Config.installationPath()}/templates/molecule/tmpl-name.molecule.cssvars.scss.tmpl`,
+        `${moleculePath}/${moleculeName}.molecule.cssvars.scss`,
+        moleculeName,
+        'scss'
+      );
       Common.successMessage(`register component: ${moleculeName}`);
     }
   },

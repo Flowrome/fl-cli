@@ -13,11 +13,11 @@ export class AppPage {
       <stencil-router>
         <stencil-route-switch scrollTopOffset={0}>
           <stencil-route
-            url='/'
-            component='welcome-page' // YOU CAN REMOVE THIS ROUTE
+            url="/"
+            component="welcome-page" // YOU CAN REMOVE THIS ROUTE
             exact={true}
           ></stencil-route>
-          {!environment.prod && <stencil-route url='/md-reader' component='markdown-reader' />}
+          {!environment.prod && <stencil-route url="/md-reader" component="markdown-reader" />}
         </stencil-route-switch>
       </stencil-router>
     );

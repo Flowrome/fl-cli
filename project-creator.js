@@ -84,6 +84,13 @@ module.exports = {
       'babel'
     );
 
+    Common.readTmplAndWrite(
+      `${Config.installationPath()}/to-copy/fl-css-component-importer.js.tmpl`,
+      `${appPath}/fl-css-component-importer.js`,
+      '',
+      'babel'
+    );
+
     const promise = Promise.all([
       new Promise((resolve, reject) =>
         ncp(`${Config.installationPath()}/to-copy/src/styles`, `${appPath}/src/styles`, err =>
