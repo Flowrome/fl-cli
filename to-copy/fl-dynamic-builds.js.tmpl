@@ -113,9 +113,15 @@ function startGlobComponents(build, cb) {
           const regexTag = /tag:.*$/gm;
           const regexName = /['|"].*["|']/gm;
           const name = ((file.match(regexTag) || [''])[0].match(regexName) || [
-            '',
+            ''
           ])[0].replace(/\'/g, '');
-          if (build.componentsToExclude.indexOf(name) > -1) {
+          const expression = () => {
+            return !!build.componentsToInclude &&
+              build.componentsToInclude.length > 0
+              ? build.componentsToExclude.indexOf(name) < 0
+              : build.componentsToExclude.indexOf(name) > -1;
+          };
+          if (expression()) {
             const p = path.split('/');
             p.pop();
             componentsToRemovePath.push(p.join('/'));
@@ -123,7 +129,7 @@ function startGlobComponents(build, cb) {
         });
         cb(componentsToRemovePath);
       }
-    },
+    }
   );
 }
 
@@ -141,7 +147,7 @@ function removeComponents(arrayToRemove, build) {
 
 function startShell(build, cb) {
   const spinner = ora(
-    `FLCLI: INSTALLING DEPS: ${build.type} (it will require some time)` + '\n',
+    `FLCLI: INSTALLING DEPS: ${build.type} (it will require some time)` + '\n'
   ).start();
   shell.cd(`..${pathDivider}${build.tmpFolder}`);
   shell.exec('npm i', null, () => {
@@ -162,7 +168,7 @@ function startCopyingFundamentals(build) {
     const fullPathElem = `..${pathDivider}${build.tmpFolder}${pathDivider}${elem}`;
     fsx.copySync(
       fullPathElem,
-      `${basePath}${buildConfig.folderBuilds}${pathDivider}${build.type}${pathDivider}${elem}`,
+      `${basePath}${buildConfig.folderBuilds}${pathDivider}${build.type}${pathDivider}${elem}`
     );
   });
   rimraf.sync(`..${pathDivider}${build.tmpFolder}`);
@@ -182,22 +188,22 @@ if (flConfig) {
           basePath + build['tmp-folder'].replace(/\//g, `${pathDivider}`),
         folderToRemove: [
           ...build['folder-to-remove'].map(
-            fd => basePath + fd.replace(/\//g, `${pathDivider}`),
-          ),
+            fd => basePath + fd.replace(/\//g, `${pathDivider}`)
+          )
         ],
         componentsToExclude: build['components-to-exclude'],
         elementsToCopy: [
           ...build['elements-to-copy'].map(
-            fd => basePath + fd.replace(/\//g, `${pathDivider}`),
-          ),
+            fd => basePath + fd.replace(/\//g, `${pathDivider}`)
+          )
         ],
         filesBuiltToCopy: [
           ...build['files-built-to-copy'].map(
-            fd => basePath + fd.replace(/\//g, `${pathDivider}`),
-          ),
-        ],
-      })),
-    ],
+            fd => basePath + fd.replace(/\//g, `${pathDivider}`)
+          )
+        ]
+      }))
+    ]
   };
   startProcess();
 } else {
@@ -212,7 +218,7 @@ function rebuildLocalPackages(build) {
     rebuildStencilConfig(buildName),
     rebuildLocalStencilConfig(buildName),
     rebuildIndexHTML(buildName),
-    rebuildOutputTargets(),
+    rebuildOutputTargets()
   ].map(elem => {
     fs.writeFileSync(`${baseDirectory}${elem.fileName}`, elem.file);
   });
@@ -222,7 +228,7 @@ function rebuildLocalPackages(build) {
 function rebuildPackageJson(buildName) {
   const regex = new RegExp(`${packageName}`, 'g');
   const renamedPackage = JSON.parse(
-    package.replace(regex, `${packageName}-${buildName}`),
+    package.replace(regex, `${packageName}-${buildName}`)
   );
   return { file: JSON.stringify(renamedPackage), fileName: 'package.json' };
 }
@@ -237,36 +243,36 @@ function rebuildStencilConfig(buildName) {
 function rebuildLocalStencilConfig(buildName) {
   const localStencil = fs.readFileSync(
     `${basePath}fl-stencil-config.json`,
-    'UTF-8',
+    'UTF-8'
   );
   const regex = new RegExp(`${packageName}`, 'g');
   const renamedStencilLocal = JSON.parse(
-    localStencil.replace(regex, `${packageName}-${buildName}`),
+    localStencil.replace(regex, `${packageName}-${buildName}`)
   );
   return {
     file: JSON.stringify(renamedStencilLocal),
-    fileName: 'fl-stencil-config.json',
+    fileName: 'fl-stencil-config.json'
   };
 }
 
 function rebuildOutputTargets() {
   const outputTargets = fs.readFileSync(
     `${basePath}stencil.config.output-targets.json`,
-    'UTF-8',
+    'UTF-8'
   );
   const renamedOutputTargets = JSON.parse(outputTargets).filter(
-    target => target === 'dist',
+    target => target === 'dist'
   );
   return {
     file: JSON.stringify(renamedOutputTargets),
-    fileName: 'stencil.config.output-targets.json',
+    fileName: 'stencil.config.output-targets.json'
   };
 }
 
 function rebuildIndexHTML(buildName) {
   const html = fs.readFileSync(
     `${basePath}src${pathDivider}index.html`,
-    'UTF-8',
+    'UTF-8'
   );
   const regex = new RegExp(`${packageName}`, 'g');
   const renamedIndexHtml = html.replace(regex, `${packageName}-${buildName}`);
