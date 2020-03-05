@@ -176,8 +176,17 @@ module.exports = {
           ''
         );
         Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/.gitignore.tmpl`, `${appPath}/.gitignore`, '');
-        Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/bundler.js.tmpl`, `${appPath}/bundler.js`, '');
+        Common.readTmplAndWrite(
+          `${Config.installationPath()}/to-copy/fl-bundler.js.tmpl`,
+          `${appPath}/fl-bundler.js`,
+          ''
+        );
         Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/bundles.ts.tmpl`, `${appPath}/bundles.ts`, '');
+        Common.readTmplAndWrite(
+          `${Config.installationPath()}/to-copy/fl-css-theme-builder.js.tmpl`,
+          `${appPath}/fl-css-theme-builder.js`,
+          ''
+        );
         Common.successMessage('copied succsesfully stencil files');
       })
       .catch(error => {

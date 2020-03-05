@@ -22,9 +22,9 @@
     "create-molecule": "flcli molecule",
     "create-page": "flcli page",
   
-    "start": "npm run import-vars && node ./fl-stencil-env-chooser.js",
-    "start-dev": "npm run import-vars && node ./fl-stencil-env-chooser.js env=dev",
-    "start-prod": "npm run import-vars && node ./fl-stencil-env-chooser.js env=prod",
+    "start": "npm run import-vars && npm run bundler && node ./fl-stencil-env-chooser.js",
+    "start-dev": "npm run import-vars && npm run bundler && node ./fl-stencil-env-chooser.js env=dev",
+    "start-prod": "npm run import-vars && npm run bundler && node ./fl-stencil-env-chooser.js env=prod",
     "build": "npm run start compile",
     "build-dev": "npm run start-dev compile",
     "build-prod": "npm run start-prod compile",
@@ -34,7 +34,7 @@
     "e2e-test": "stencil test --e2e",
 
     "compile-start": "npm run import-vars && stencil build --dev --watch --serve",
-    "compile": "npm run import-vars && stencil build --docs",
+    "compile": "npm run import-vars && stencil build --docs && npm run css-theme-builder",
 
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
@@ -45,7 +45,9 @@
     "prettier:tslint": "npm run prettier && npm run tslint:fix",
     "check:staged": "lint-staged",
     "pr-copy": "node ./fl-dynamic-builds.js",
-    "tslinter": "tslint --fix -c ./tslint.json 'src/**/*{.ts,.tsx}'"
+    "bundler": "node ./fl-bundler.js",
+    "tslinter": "tslint --fix -c ./tslint.json 'src/**/*{.ts,.tsx}'",
+    "css-theme-builder": "node ./fl-css-theme-builder.js"
   },
   "husky": {
     "hooks": {
@@ -67,6 +69,7 @@
     "@stencil/core": "^1.0.7",
     "pre-commit": "^1.2.2",
     "prettier": "1.18.2",
+    "clean-css": "^4.2.3",
     "tslint": "^5.10.0",
     "tslint-react": "^3.6.0",
     "husky": "^3.0.5",
