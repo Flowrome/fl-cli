@@ -3,25 +3,21 @@ const fs = require('fs');
 
 let projectName = null;
 
-if (fs.existsSync('./fl-stencil-config.json')) {
-  projectName = JSON.parse(
-    fs.readFileSync('./fl-stencil-config.json', 'UTF-8')
-  )['app-name'];
+const pathDivider = process.platform === 'win32' ? '\\' : '/';
+const basePath = `.${pathDivider}`;
+
+if (fs.existsSync(`${basePath}fl-stencil-config.json`)) {
+  projectName = JSON.parse(fs.readFileSync(`${basePath}fl-stencil-config.json`, 'UTF-8'))['app-name'];
 }
 
-const distPath = `./dist/${projectName}/${projectName}.css`;
-const distPathTheme = `./dist/${projectName}/${projectName}-standard-theme.css`;
+const distPath = `${basePath}dist${pathDivider}${projectName}${pathDivider}${projectName}.css`;
+const distPathTheme = `${basePath}dist${pathDivider}${projectName}${pathDivider}${projectName}-standard-theme.css`;
 
 if (fs.existsSync(distPath)) {
-  const cssString = new css({ level: 2 }).minify(
-    fs.readFileSync(distPath, 'UTF-8')
-  ).styles;
+  const cssString = new css({ level: 2 }).minify(fs.readFileSync(distPath, 'UTF-8')).styles;
   const regex = /(\@media.*?{)?(\:root(\.light|\.dark)?( )?,)?\:root(\.light|\.dark)?( )?{.*?}(( )?})?/gm;
   const cssVariablesArray = cssString.match(regex).join('\n');
-  fs.writeFileSync(
-    distPathTheme,
-    new css({ level: 2 }).minify(cssVariablesArray).styles
-  );
+  fs.writeFileSync(distPathTheme, new css({ level: 2 }).minify(cssVariablesArray).styles);
 } else {
   console.error('ERROR - Please run the build first');
 }
