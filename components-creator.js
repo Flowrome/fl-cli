@@ -41,7 +41,7 @@ module.exports = {
         `${Config.installationPath()}/templates/molecule/tmpl-name.molecule.stories.js.tmpl`,
         `${moleculePath}/${moleculeName}.stories.js`,
         [moleculeName, moleculeNameClass],
-        'jsx',
+        'babel',
         [Config.toReplace, /\[TMPL_NAME\:CLASS_CASE\]/g]
       );
       Common.readTmplAndWrite(
