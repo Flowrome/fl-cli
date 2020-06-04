@@ -187,6 +187,21 @@ module.exports = {
           `${appPath}/fl-css-theme-builder.js`,
           ''
         );
+        Common.readTmplAndWrite(
+          `${Config.installationPath()}/to-copy/.storybook/main.js.tmpl`,
+          `${appPath}/.storybook/main.js`,
+          ''
+        );
+        Common.readTmplAndWrite(
+          `${Config.installationPath()}/to-copy/.storybook/stories-compiler.js.tmpl`,
+          `${appPath}/.storybook/stories-compiler.js`,
+          ''
+        );
+        Common.readTmplAndWrite(
+          `${Config.installationPath()}/to-copy/.storybook/config.js.tmpl`,
+          `${appPath}/.storybook/config.js`,
+          ''
+        );
         Common.successMessage('copied succsesfully stencil files');
       })
       .catch(error => {

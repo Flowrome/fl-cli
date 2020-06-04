@@ -1,0 +1,33 @@
+const globLib = require('glob');
+const fs = require('fs');
+const pathDivider = process.platform === 'win32' ? '\\' : '/';
+
+const glob = (pattern, options) => {
+  const globPromise = new Promise((resolve, reject) => {
+    globLib(pattern, options, (err, matches) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(matches && matches.length > 0 ? matches : []);
+      }
+    });
+  });
+  return globPromise;
+};
+
+const patterns = [
+  `${__dirname}${pathDivider}..${pathDivider}src${pathDivider}components${pathDivider}molecules${pathDivider}**${pathDivider}*.stories.js`
+];
+
+const fileToWrite = `${__dirname}${pathDivider}.${pathDivider}stories-path.js`;
+
+(async () => {
+  let paths = (await Promise.all(patterns.map(pattern => glob(pattern)))).reduce(
+    (a, b) => [...a, ...b],
+    []
+  );
+  const toWrite = `module.exports = [
+        ${paths.map(path => `'${path}'`).join(',\n')}
+    ]`;
+  fs.writeFileSync(fileToWrite, toWrite);
+})();

@@ -38,6 +38,13 @@ module.exports = {
         [Config.toReplace, /\[TMPL_NAME\:CLASS_CASE\]/g]
       );
       Common.readTmplAndWrite(
+        `${Config.installationPath()}/templates/molecule/tmpl-name.molecule.stories.js.tmpl`,
+        `${moleculePath}/${moleculeName}.stories.js`,
+        [moleculeName, moleculeNameClass],
+        'jsx',
+        [Config.toReplace, /\[TMPL_NAME\:CLASS_CASE\]/g]
+      );
+      Common.readTmplAndWrite(
         `${Config.installationPath()}/templates/molecule/tmpl-name.molecule.scss.tmpl`,
         `${moleculePath}/${moleculeName}.molecule.scss`,
         moleculeName,
