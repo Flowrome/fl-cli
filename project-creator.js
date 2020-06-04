@@ -179,13 +179,33 @@ module.exports = {
         Common.readTmplAndWrite(
           `${Config.installationPath()}/to-copy/fl-bundler.js.tmpl`,
           `${appPath}/fl-bundler.js`,
-          ''
+          '',
+          'babel'
         );
         Common.readTmplAndWrite(`${Config.installationPath()}/to-copy/bundles.ts.tmpl`, `${appPath}/bundles.ts`, '');
         Common.readTmplAndWrite(
           `${Config.installationPath()}/to-copy/fl-css-theme-builder.js.tmpl`,
           `${appPath}/fl-css-theme-builder.js`,
-          ''
+          '',
+          'babel'
+        );
+        Common.readTmplAndWrite(
+          `${Config.installationPath()}/to-copy/.storybook/main.js.tmpl`,
+          `${appPath}/.storybook/main.js`,
+          _.kebabCase(appName),
+          'babel'
+        );
+        Common.readTmplAndWrite(
+          `${Config.installationPath()}/to-copy/.storybook/stories-compiler.js.tmpl`,
+          `${appPath}/.storybook/stories-compiler.js`,
+          '',
+          'babel'
+        );
+        Common.readTmplAndWrite(
+          `${Config.installationPath()}/to-copy/.storybook/config.js.tmpl`,
+          `${appPath}/.storybook/config.js`,
+          _.kebabCase(appName),
+          'babel'
         );
         Common.successMessage('copied succsesfully stencil files');
       })

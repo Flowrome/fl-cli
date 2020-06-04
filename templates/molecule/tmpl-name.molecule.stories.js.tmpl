@@ -1,0 +1,11 @@
+import { withKnobs, text } from '@storybook/addon-knobs';
+
+export default {
+  title: '[TMPL_NAME:CLASS_CASE]Molecule',
+  decorators: [withKnobs]
+};
+
+export const [TMPL_NAME:CLASS_CASE]MoleculeStory = () => {
+  const textKnob = text('text', 'YEY! Storybook');
+  return `<[TMPL_NAME]-molecule text='${textKnob}'></[TMPL_NAME]-molecule>`;
+};
