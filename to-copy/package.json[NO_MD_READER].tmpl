@@ -21,7 +21,6 @@
     "import-vars": "node ./fl-css-component-importer.js",
     "create-molecule": "flcli molecule",
     "create-page": "flcli page",
-  
     "start": "npm run import-vars && npm run bundler && node ./fl-stencil-env-chooser.js",
     "start-dev": "npm run import-vars && npm run bundler && node ./fl-stencil-env-chooser.js env=dev",
     "start-prod": "npm run import-vars && npm run bundler && node ./fl-stencil-env-chooser.js env=prod",
@@ -30,18 +29,14 @@
     "build-prod": "npm run start-prod compile",
     "build-prod-dupes": "npm run pr-copy",
     "build-for-storybook": "npm run start compile-storybook",
-
     "spec-test": "stencil test --spec",
     "e2e-test": "stencil test --e2e",
-
     "compile-start": "npm run import-vars && stencil build --dev --watch --serve",
     "compile": "npm run import-vars && stencil build --docs && npm run css-theme-builder",
     "compile-storybook": "npm run import-vars && stencil build --dev --serve --watch --es5 --docs && npm run css-theme-builder",
-    "compile-stories": "node ./.storybook/stories-compiler.js"
-
+    "compile-stories": "node ./.storybook/stories-compiler.js",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
-
     "prettier": "npx prettier --write \"src/**/*.{js,ts,tsx,scss}\"",
     "tslint": "npx tslint -c ./tslint.json --project ./tsconfig.json",
     "tslint:fix": "npx tslint --fix -c ./tslint.json --project ./tsconfig.json",
@@ -50,10 +45,10 @@
     "pr-copy": "node ./fl-dynamic-builds.js",
     "bundler": "node ./fl-bundler.js",
     "tslinter": "tslint --fix -c ./tslint.json 'src/**/*{.ts,.tsx}'",
-    "css-theme-builder": "node ./fl-css-theme-builder.js"
+    "css-theme-builder": "node ./fl-css-theme-builder.js",
     "storybook": "npm run compile-stories && start-storybook -p 6006",
-    "build-storybook": "npm run compile-stories && build-storybook",
-   },
+    "build-storybook": "npm run compile-stories && build-storybook"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -85,7 +80,7 @@
     "@storybook/addon-notes": "^5.3.19",
     "@storybook/html": "^5.3.19",
     "babel-loader": "^8.1.0",
-    "@babel/core": "^7.10.2",
+    "@babel/core": "^7.10.2"
   },
   "license": "MIT",
   "dependencies": {
