@@ -93,18 +93,20 @@ module.exports = {
 
     const promise = Promise.all([
       new Promise((resolve, reject) =>
-        ncp(`${Config.installationPath()}/to-copy/src/styles`, `${appPath}/src/styles`, err =>
+        ncp(`${Config.installationPath()}/to-copy/src/styles`, `${appPath}/src/styles`, (err) =>
           err ? reject(err) : resolve()
         )
       ),
       new Promise((resolve, reject) =>
-        ncp(`${Config.installationPath()}/to-copy/src/assets`, `${appPath}/src/assets`, err =>
+        ncp(`${Config.installationPath()}/to-copy/src/assets`, `${appPath}/src/assets`, (err) =>
           err ? reject(err) : resolve()
         )
       ),
       new Promise((resolve, reject) =>
-        ncp(`${Config.installationPath()}/to-copy/envs`, `${appPath}/src/envs`, err => (err ? reject(err) : resolve()))
-      )
+        ncp(`${Config.installationPath()}/to-copy/envs`, `${appPath}/src/envs`, (err) =>
+          err ? reject(err) : resolve()
+        )
+      ),
     ]);
     return promise
       .then(() => {
@@ -207,9 +209,27 @@ module.exports = {
           _.kebabCase(appName),
           'babel'
         );
+        Common.readTmplAndWrite(
+          `${Config.installationPath()}/to-copy/.storybook/config.js.tmpl`,
+          `${appPath}/.storybook/config.js`,
+          _.kebabCase(appName),
+          'babel'
+        );
+        Common.readTmplAndWrite(
+          `${Config.installationPath()}/to-copy/.storybook/decorators/centered.js.tmpl`,
+          `${appPath}/.storybook/decorators/centered.js`,
+          _.kebabCase(appName),
+          'babel'
+        );
+        Common.readTmplAndWrite(
+          `${Config.installationPath()}/to-copy/.storybook/styles/main.css.tmpl`,
+          `${appPath}/.storybook/styles/main.css`,
+          _.kebabCase(appName),
+          'css'
+        );
         Common.successMessage('copied succsesfully stencil files');
       })
-      .catch(error => {
+      .catch((error) => {
         Common.exitWithError(error);
       });
   },
@@ -312,5 +332,5 @@ module.exports = {
       'scss'
     );
     Common.successMessage('register welcome-page');
-  }
+  },
 };
