@@ -194,7 +194,7 @@ By default only the molecule folder is red, you can change it by modifying the `
 
 ```js
 const patterns = [
-  `${__dirname}${pathDivider}..${pathDivider}src${pathDivider}components${pathDivider}molecules${pathDivider}**${pathDivider}*.stories.js`
+  `${__dirname}${pathDivider}..${pathDivider}src${pathDivider}components${pathDivider}molecules${pathDivider}**${pathDivider}*.stories.js`,
 ];
 ```
 
@@ -205,6 +205,23 @@ To launch storybook you have to run these two scripts (in two instances of termi
 
 You can wrap the using [concurrently](https://www.npmjs.com/package/concurrently)
 Stencil can use only Storybook for HTML version, so you won't write in JSX but you will write in plain JS.
+
+To center your items in Storybook preview you can use the decorator `centered` inside `.storybook/decorators/centered.js`:
+
+```js
+import { centered } from 'path/to/.storybook/decorators/centered'
+
+export default {
+  title: 'MyMoleculeName',
+  decorators: [..., centered],
+  includeStories: ['MyMoleculeNameStory'],
+  parameters: {
+    notes: {
+      markdown: readme
+    }
+  }
+};
+```
 
 ## DISTRIBUTION (aka dist)
 
