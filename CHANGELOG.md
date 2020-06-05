@@ -1,3 +1,8 @@
+## Version 1.0.2-2
+
+- added readmes inside molecule generator
+- added centered decorator for storybook
+
 ## Version 1.0.2
 
 - added Storybook compatibility

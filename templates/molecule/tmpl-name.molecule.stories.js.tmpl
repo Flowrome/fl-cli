@@ -1,8 +1,14 @@
 import { withKnobs, text } from '@storybook/addon-knobs';
+import readme from 'readme.md'
 
 export default {
   title: '[TMPL_NAME:CLASS_CASE]Molecule',
-  decorators: [withKnobs]
+  decorators: [withKnobs],
+  parameters: {
+    notes: {
+      markdown: readme
+    }
+  }
 };
 
 export const [TMPL_NAME:CLASS_CASE]MoleculeStory = () => {
