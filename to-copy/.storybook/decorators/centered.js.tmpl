@@ -1,1 +1,10 @@
-export const centered = story => `<section class="centered-section">${story()}</section>`;
+export const centered = story => {
+  const container = document.createElement('section');
+  container.classList.add('centered-section');
+  if (typeof story() === 'string') {
+    container.innerHTML = story();
+  } else {
+    container.appendChild(story());
+  }
+  return container;
+};
