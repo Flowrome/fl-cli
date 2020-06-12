@@ -1,3 +1,7 @@
+## Version 1.0.2-7
+
+- Now MD reader is not included as default option while creating a project
+
 ## Version 1.0.2-2
 
 - added readmes inside molecule generator

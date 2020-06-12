@@ -21,18 +21,18 @@ module.exports = {
         choices: [
           {
             title: 'Project',
-            value: 'project'
+            value: 'project',
           },
           {
             title: 'Page',
-            value: 'page'
+            value: 'page',
           },
           {
             title: 'Molecule',
-            value: 'molecule'
-          }
+            value: 'molecule',
+          },
         ],
-        validate: type => /(project|page|molecule)/gm.test(type)
+        validate: (type) => /(project|page|molecule)/gm.test(type),
       },
       {
         type: () => (array.length < 4 ? 'text' : null),
@@ -53,40 +53,40 @@ module.exports = {
           }
           return ret;
         },
-        validate: name => /[a-zA-Z_-]/gm.test(name)
+        validate: (name) => /[a-zA-Z_-]/gm.test(name),
       },
       {
         type: (prev, values) => (fs.existsSync(`./${values.name}`) ? 'confirm' : null),
         name: 'overwrite',
         initial: false,
-        message: (prev, values) => `A project with this name: ${values.name} already exists in folder, Overwrite?`
+        message: (prev, values) => `A project with this name: ${values.name} already exists in folder, Overwrite?`,
       },
       {
         type: (prev, values) => (values.type === 'project' || array[2] === 'project' ? 'text' : null),
         name: 'molecule_prefix',
         initial: 'fl',
         message: 'Which prefix do you choose for your molecules?',
-        validate: mp => /^[a-zA-Z]+$/gm.test(mp)
+        validate: (mp) => /^[a-zA-Z]+$/gm.test(mp),
       },
       {
         type: (prev, values) => (values.type === 'project' || array[2] === 'project' ? 'confirm' : null),
         name: 'include_spec',
         initial: true,
-        message: 'Include Unit tests?'
+        message: 'Include Unit tests?',
       },
       {
         type: (prev, values) => (values.type === 'project' || array[2] === 'project' ? 'confirm' : null),
         name: 'include_etoe',
         initial: true,
-        message: 'Include E2E tests?'
+        message: 'Include E2E tests?',
       },
       {
         type: (prev, values) => (values.type === 'project' || array[2] === 'project' ? 'confirm' : null),
         name: 'include_md_reader',
-        initial: true,
-        message: 'Include MD READER feature?'
-      }
-    ].filter(field => !!field);
+        initial: false,
+        message: 'Include MD READER feature?',
+      },
+    ].filter((field) => !!field);
     const result = await prompts(scheme);
     if (result) {
       if (!!result.overwrite) {
@@ -135,5 +135,5 @@ module.exports = {
           break;
       }
     }
-  }
+  },
 };
