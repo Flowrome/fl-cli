@@ -1,3 +1,8 @@
+## Version 1.0.2-8
+
+- Updated to latest version of storybook `6.0.5`
+- Removed stories compiler, now it's not needed anymore
+
 ## Version 1.0.2-7
 
 - Now MD reader is not included as default option while creating a project

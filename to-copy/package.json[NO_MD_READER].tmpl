@@ -34,7 +34,6 @@
     "compile-start": "npm run import-vars && stencil build --dev --watch --serve",
     "compile": "npm run import-vars && stencil build --docs && npm run css-theme-builder",
     "compile-storybook": "npm run import-vars && stencil build --dev --serve --watch --es5 --docs && npm run css-theme-builder",
-    "compile-stories": "node ./.storybook/stories-compiler.js",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "prettier": "npx prettier --write \"src/**/*.{js,ts,tsx,scss}\"",
@@ -46,8 +45,8 @@
     "bundler": "node ./fl-bundler.js",
     "tslinter": "tslint --fix -c ./tslint.json 'src/**/*{.ts,.tsx}'",
     "css-theme-builder": "node ./fl-css-theme-builder.js",
-    "storybook": "npm run compile-stories && start-storybook -p 6006",
-    "build-storybook": "npm run compile-stories && build-storybook"
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "husky": {
     "hooks": {
@@ -76,9 +75,9 @@
     "lint-staged": "^9.2.5",
     "write-file-webpack-plugin": "^4.5.1",
     "copy-webpack-plugin": "^6.0.2",
-    "@storybook/addon-knobs": "^5.3.19",
-    "@storybook/addon-notes": "^5.3.19",
-    "@storybook/html": "^5.3.19",
+    "@storybook/addon-actions": "^6.0.5",
+    "@storybook/addon-knobs": "^6.0.5",
+    "@storybook/html": "^6.0.5",
     "babel-loader": "^8.1.0",
     "@babel/core": "^7.10.2"
   },
