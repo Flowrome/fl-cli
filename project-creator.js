@@ -204,14 +204,8 @@ module.exports = {
           'babel'
         );
         Common.readTmplAndWrite(
-          `${Config.installationPath()}/to-copy/.storybook/config.js.tmpl`,
-          `${appPath}/.storybook/config.js`,
-          _.kebabCase(appName),
-          'babel'
-        );
-        Common.readTmplAndWrite(
-          `${Config.installationPath()}/to-copy/.storybook/config.js.tmpl`,
-          `${appPath}/.storybook/config.js`,
+          `${Config.installationPath()}/to-copy/.storybook/preview.js.tmpl`,
+          `${appPath}/.storybook/preview.js`,
           _.kebabCase(appName),
           'babel'
         );

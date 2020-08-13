@@ -1,6 +1,6 @@
 {
   "name": "fl-stencil-cli",
-  "version": "1.0.2-7",
+  "version": "1.0.2-8",
   "description": "",
   "main": "./indexes/index.prod.js",
   "scripts": {
